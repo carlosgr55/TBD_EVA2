@@ -1,0 +1,620 @@
+EVA2_7_INNER_JOIN
+
+MySQL Shell 8.0.37
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 10
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use sakila;
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > select * from actor limit 30;
++----------+------------+--------------+---------------------+
+| actor_id | first_name | last_name    | last_update         |
++----------+------------+--------------+---------------------+
+|        1 | PENELOPE   | GUINESS      | 2006-02-15 04:34:33 |
+|        2 | NICK       | WAHLBERG     | 2006-02-15 04:34:33 |
+|        3 | ED         | CHASE        | 2006-02-15 04:34:33 |
+|        4 | JENNIFER   | DAVIS        | 2006-02-15 04:34:33 |
+|        5 | JOHNNY     | LOLLOBRIGIDA | 2006-02-15 04:34:33 |
+|        6 | BETTE      | NICHOLSON    | 2006-02-15 04:34:33 |
+|        7 | GRACE      | MOSTEL       | 2006-02-15 04:34:33 |
+|        8 | MATTHEW    | JOHANSSON    | 2006-02-15 04:34:33 |
+|        9 | JOE        | SWANK        | 2006-02-15 04:34:33 |
+|       10 | CHRISTIAN  | GABLE        | 2006-02-15 04:34:33 |
+|       11 | ZERO       | CAGE         | 2006-02-15 04:34:33 |
+|       12 | KARL       | BERRY        | 2006-02-15 04:34:33 |
+|       13 | UMA        | WOOD         | 2006-02-15 04:34:33 |
+|       14 | VIVIEN     | BERGEN       | 2006-02-15 04:34:33 |
+|       15 | CUBA       | OLIVIER      | 2006-02-15 04:34:33 |
+|       16 | FRED       | COSTNER      | 2006-02-15 04:34:33 |
+|       17 | HELEN      | VOIGHT       | 2006-02-15 04:34:33 |
+|       18 | DAN        | TORN         | 2006-02-15 04:34:33 |
+|       19 | BOB        | FAWCETT      | 2006-02-15 04:34:33 |
+|       20 | LUCILLE    | TRACY        | 2006-02-15 04:34:33 |
+|       21 | KIRSTEN    | PALTROW      | 2006-02-15 04:34:33 |
+|       22 | ELVIS      | MARX         | 2006-02-15 04:34:33 |
+|       23 | SANDRA     | KILMER       | 2006-02-15 04:34:33 |
+|       24 | CAMERON    | STREEP       | 2006-02-15 04:34:33 |
+|       25 | KEVIN      | BLOOM        | 2006-02-15 04:34:33 |
+|       26 | RIP        | CRAWFORD     | 2006-02-15 04:34:33 |
+|       27 | JULIA      | MCQUEEN      | 2006-02-15 04:34:33 |
+|       28 | WOODY      | HOFFMAN      | 2006-02-15 04:34:33 |
+|       29 | ALEC       | WAYNE        | 2006-02-15 04:34:33 |
+|       30 | SANDRA     | PECK         | 2006-02-15 04:34:33 |
++----------+------------+--------------+---------------------+
+30 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select * from customer limit 39;
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+| customer_id | store_id | first_name | last_name | email                               | address_id | active | create_date         | last_update         |
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+|           1 |        1 | MARY       | SMITH     | MARY.SMITH@sakilacustomer.org       |          5 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           2 |        1 | PATRICIA   | JOHNSON   | PATRICIA.JOHNSON@sakilacustomer.org |          6 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           3 |        1 | LINDA      | WILLIAMS  | LINDA.WILLIAMS@sakilacustomer.org   |          7 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           4 |        2 | BARBARA    | JONES     | BARBARA.JONES@sakilacustomer.org    |          8 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           5 |        1 | ELIZABETH  | BROWN     | ELIZABETH.BROWN@sakilacustomer.org  |          9 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           6 |        2 | JENNIFER   | DAVIS     | JENNIFER.DAVIS@sakilacustomer.org   |         10 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           7 |        1 | MARIA      | MILLER    | MARIA.MILLER@sakilacustomer.org     |         11 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           8 |        2 | SUSAN      | WILSON    | SUSAN.WILSON@sakilacustomer.org     |         12 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|           9 |        2 | MARGARET   | MOORE     | MARGARET.MOORE@sakilacustomer.org   |         13 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          10 |        1 | DOROTHY    | TAYLOR    | DOROTHY.TAYLOR@sakilacustomer.org   |         14 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          11 |        2 | LISA       | ANDERSON  | LISA.ANDERSON@sakilacustomer.org    |         15 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          12 |        1 | NANCY      | THOMAS    | NANCY.THOMAS@sakilacustomer.org     |         16 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          13 |        2 | KAREN      | JACKSON   | KAREN.JACKSON@sakilacustomer.org    |         17 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          14 |        2 | BETTY      | WHITE     | BETTY.WHITE@sakilacustomer.org      |         18 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          15 |        1 | HELEN      | HARRIS    | HELEN.HARRIS@sakilacustomer.org     |         19 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          16 |        2 | SANDRA     | MARTIN    | SANDRA.MARTIN@sakilacustomer.org    |         20 |      0 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          17 |        1 | DONNA      | THOMPSON  | DONNA.THOMPSON@sakilacustomer.org   |         21 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          18 |        2 | CAROL      | GARCIA    | CAROL.GARCIA@sakilacustomer.org     |         22 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          19 |        1 | RUTH       | MARTINEZ  | RUTH.MARTINEZ@sakilacustomer.org    |         23 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          20 |        2 | SHARON     | ROBINSON  | SHARON.ROBINSON@sakilacustomer.org  |         24 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          21 |        1 | MICHELLE   | CLARK     | MICHELLE.CLARK@sakilacustomer.org   |         25 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          22 |        1 | LAURA      | RODRIGUEZ | LAURA.RODRIGUEZ@sakilacustomer.org  |         26 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          23 |        2 | SARAH      | LEWIS     | SARAH.LEWIS@sakilacustomer.org      |         27 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          24 |        2 | KIMBERLY   | LEE       | KIMBERLY.LEE@sakilacustomer.org     |         28 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          25 |        1 | DEBORAH    | WALKER    | DEBORAH.WALKER@sakilacustomer.org   |         29 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          26 |        2 | JESSICA    | HALL      | JESSICA.HALL@sakilacustomer.org     |         30 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          27 |        2 | SHIRLEY    | ALLEN     | SHIRLEY.ALLEN@sakilacustomer.org    |         31 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          28 |        1 | CYNTHIA    | YOUNG     | CYNTHIA.YOUNG@sakilacustomer.org    |         32 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          29 |        2 | ANGELA     | HERNANDEZ | ANGELA.HERNANDEZ@sakilacustomer.org |         33 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          30 |        1 | MELISSA    | KING      | MELISSA.KING@sakilacustomer.org     |         34 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          31 |        2 | BRENDA     | WRIGHT    | BRENDA.WRIGHT@sakilacustomer.org    |         35 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          32 |        1 | AMY        | LOPEZ     | AMY.LOPEZ@sakilacustomer.org        |         36 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          33 |        2 | ANNA       | HILL      | ANNA.HILL@sakilacustomer.org        |         37 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          34 |        2 | REBECCA    | SCOTT     | REBECCA.SCOTT@sakilacustomer.org    |         38 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          35 |        2 | VIRGINIA   | GREEN     | VIRGINIA.GREEN@sakilacustomer.org   |         39 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          36 |        2 | KATHLEEN   | ADAMS     | KATHLEEN.ADAMS@sakilacustomer.org   |         40 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          37 |        1 | PAMELA     | BAKER     | PAMELA.BAKER@sakilacustomer.org     |         41 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          38 |        1 | MARTHA     | GONZALEZ  | MARTHA.GONZALEZ@sakilacustomer.org  |         42 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
+|          39 |        1 | DEBRA      | NELSON    | DEBRA.NELSON@sakilacustomer.org     |         43 |      1 | 2006-02-14 22:04:36 | 2006-02-15 04:57:20 |
++-------------+----------+------------+-----------+-------------------------------------+------------+--------+---------------------+---------------------+
+39 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > selecct * from payment limit 50;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selecct * from payment limit 50' at line 1
+ MySQL  localhost:3306 ssl  sakila  SQL > select * from payment limit 50;
++------------+-------------+----------+-----------+--------+---------------------+---------------------+
+| payment_id | customer_id | staff_id | rental_id | amount | payment_date        | last_update         |
++------------+-------------+----------+-----------+--------+---------------------+---------------------+
+|          1 |           1 |        1 |        76 |   2.99 | 2005-05-25 11:30:37 | 2006-02-15 22:12:30 |
+|          2 |           1 |        1 |       573 |   0.99 | 2005-05-28 10:35:23 | 2006-02-15 22:12:30 |
+|          3 |           1 |        1 |      1185 |   5.99 | 2005-06-15 00:54:12 | 2006-02-15 22:12:30 |
+|          4 |           1 |        2 |      1422 |   0.99 | 2005-06-15 18:02:53 | 2006-02-15 22:12:30 |
+|          5 |           1 |        2 |      1476 |   9.99 | 2005-06-15 21:08:46 | 2006-02-15 22:12:30 |
+|          6 |           1 |        1 |      1725 |   4.99 | 2005-06-16 15:18:57 | 2006-02-15 22:12:30 |
+|          7 |           1 |        1 |      2308 |   4.99 | 2005-06-18 08:41:48 | 2006-02-15 22:12:30 |
+|          8 |           1 |        2 |      2363 |   0.99 | 2005-06-18 13:33:59 | 2006-02-15 22:12:30 |
+|          9 |           1 |        1 |      3284 |   3.99 | 2005-06-21 06:24:45 | 2006-02-15 22:12:30 |
+|         10 |           1 |        2 |      4526 |   5.99 | 2005-07-08 03:17:05 | 2006-02-15 22:12:30 |
+|         11 |           1 |        1 |      4611 |   5.99 | 2005-07-08 07:33:56 | 2006-02-15 22:12:30 |
+|         12 |           1 |        1 |      5244 |   4.99 | 2005-07-09 13:24:07 | 2006-02-15 22:12:30 |
+|         13 |           1 |        1 |      5326 |   4.99 | 2005-07-09 16:38:01 | 2006-02-15 22:12:30 |
+|         14 |           1 |        1 |      6163 |   7.99 | 2005-07-11 10:13:46 | 2006-02-15 22:12:30 |
+|         15 |           1 |        2 |      7273 |   2.99 | 2005-07-27 11:31:22 | 2006-02-15 22:12:30 |
+|         16 |           1 |        1 |      7841 |   4.99 | 2005-07-28 09:04:45 | 2006-02-15 22:12:30 |
+|         17 |           1 |        2 |      8033 |   4.99 | 2005-07-28 16:18:23 | 2006-02-15 22:12:30 |
+|         18 |           1 |        1 |      8074 |   0.99 | 2005-07-28 17:33:39 | 2006-02-15 22:12:30 |
+|         19 |           1 |        2 |      8116 |   0.99 | 2005-07-28 19:20:07 | 2006-02-15 22:12:30 |
+|         20 |           1 |        2 |      8326 |   2.99 | 2005-07-29 03:58:49 | 2006-02-15 22:12:30 |
+|         21 |           1 |        2 |      9571 |   2.99 | 2005-07-31 02:42:18 | 2006-02-15 22:12:30 |
+|         22 |           1 |        2 |     10437 |   4.99 | 2005-08-01 08:51:04 | 2006-02-15 22:12:30 |
+|         23 |           1 |        2 |     11299 |   3.99 | 2005-08-02 15:36:52 | 2006-02-15 22:12:30 |
+|         24 |           1 |        1 |     11367 |   0.99 | 2005-08-02 18:01:38 | 2006-02-15 22:12:30 |
+|         25 |           1 |        2 |     11824 |   4.99 | 2005-08-17 12:37:54 | 2006-02-15 22:12:30 |
+|         26 |           1 |        1 |     12250 |   0.99 | 2005-08-18 03:57:29 | 2006-02-15 22:12:30 |
+|         27 |           1 |        2 |     13068 |   0.99 | 2005-08-19 09:55:16 | 2006-02-15 22:12:30 |
+|         28 |           1 |        2 |     13176 |   2.99 | 2005-08-19 13:56:54 | 2006-02-15 22:12:30 |
+|         29 |           1 |        1 |     14762 |   0.99 | 2005-08-21 23:33:57 | 2006-02-15 22:12:30 |
+|         30 |           1 |        1 |     14825 |   1.99 | 2005-08-22 01:27:57 | 2006-02-15 22:12:30 |
+|         31 |           1 |        2 |     15298 |   2.99 | 2005-08-22 19:41:37 | 2006-02-15 22:12:30 |
+|         32 |           1 |        1 |     15315 |   5.99 | 2005-08-22 20:03:46 | 2006-02-15 22:12:30 |
+|         33 |           2 |        1 |       320 |   4.99 | 2005-05-27 00:09:24 | 2006-02-15 22:12:30 |
+|         34 |           2 |        1 |      2128 |   2.99 | 2005-06-17 20:54:58 | 2006-02-15 22:12:30 |
+|         35 |           2 |        1 |      5636 |   2.99 | 2005-07-10 06:31:24 | 2006-02-15 22:12:30 |
+|         36 |           2 |        1 |      5755 |   6.99 | 2005-07-10 12:38:56 | 2006-02-15 22:12:30 |
+|         37 |           2 |        2 |      7346 |   4.99 | 2005-07-27 14:30:42 | 2006-02-15 22:12:30 |
+|         38 |           2 |        1 |      7376 |   5.99 | 2005-07-27 15:23:02 | 2006-02-15 22:12:30 |
+|         39 |           2 |        2 |      7459 |   5.99 | 2005-07-27 18:40:20 | 2006-02-15 22:12:30 |
+|         40 |           2 |        2 |      8230 |   5.99 | 2005-07-29 00:12:59 | 2006-02-15 22:12:30 |
+|         41 |           2 |        1 |      8598 |   2.99 | 2005-07-29 12:56:59 | 2006-02-15 22:12:30 |
+|         42 |           2 |        2 |      8705 |   5.99 | 2005-07-29 17:14:29 | 2006-02-15 22:12:30 |
+|         43 |           2 |        1 |      9031 |   4.99 | 2005-07-30 06:06:10 | 2006-02-15 22:12:30 |
+|         44 |           2 |        2 |      9236 |  10.99 | 2005-07-30 13:47:43 | 2006-02-15 22:12:30 |
+|         45 |           2 |        2 |      9248 |   0.99 | 2005-07-30 14:14:11 | 2006-02-15 22:12:30 |
+|         46 |           2 |        2 |      9296 |   6.99 | 2005-07-30 16:21:13 | 2006-02-15 22:12:30 |
+|         47 |           2 |        2 |      9465 |   6.99 | 2005-07-30 22:39:53 | 2006-02-15 22:12:30 |
+|         48 |           2 |        1 |     10136 |   2.99 | 2005-07-31 21:58:56 | 2006-02-15 22:12:30 |
+|         49 |           2 |        1 |     10466 |   0.99 | 2005-08-01 09:45:26 | 2006-02-15 22:12:30 |
+|         50 |           2 |        1 |     10918 |   0.99 | 2005-08-02 02:10:56 | 2006-02-15 22:12:30 |
++------------+-------------+----------+-----------+--------+---------------------+---------------------+
+50 rows in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select a.payment_id, a.customer_id, a.amount
+                                       -> , b.first_name, b.last_name from payment a
+                                       -> inner join customer b on a.customer_id = b.customer_id limit 50;
++------------+-------------+--------+------------+-----------+
+| payment_id | customer_id | amount | first_name | last_name |
++------------+-------------+--------+------------+-----------+
+|          1 |           1 |   2.99 | MARY       | SMITH     |
+|          2 |           1 |   0.99 | MARY       | SMITH     |
+|          3 |           1 |   5.99 | MARY       | SMITH     |
+|          4 |           1 |   0.99 | MARY       | SMITH     |
+|          5 |           1 |   9.99 | MARY       | SMITH     |
+|          6 |           1 |   4.99 | MARY       | SMITH     |
+|          7 |           1 |   4.99 | MARY       | SMITH     |
+|          8 |           1 |   0.99 | MARY       | SMITH     |
+|          9 |           1 |   3.99 | MARY       | SMITH     |
+|         10 |           1 |   5.99 | MARY       | SMITH     |
+|         11 |           1 |   5.99 | MARY       | SMITH     |
+|         12 |           1 |   4.99 | MARY       | SMITH     |
+|         13 |           1 |   4.99 | MARY       | SMITH     |
+|         14 |           1 |   7.99 | MARY       | SMITH     |
+|         15 |           1 |   2.99 | MARY       | SMITH     |
+|         16 |           1 |   4.99 | MARY       | SMITH     |
+|         17 |           1 |   4.99 | MARY       | SMITH     |
+|         18 |           1 |   0.99 | MARY       | SMITH     |
+|         19 |           1 |   0.99 | MARY       | SMITH     |
+|         20 |           1 |   2.99 | MARY       | SMITH     |
+|         21 |           1 |   2.99 | MARY       | SMITH     |
+|         22 |           1 |   4.99 | MARY       | SMITH     |
+|         23 |           1 |   3.99 | MARY       | SMITH     |
+|         24 |           1 |   0.99 | MARY       | SMITH     |
+|         25 |           1 |   4.99 | MARY       | SMITH     |
+|         26 |           1 |   0.99 | MARY       | SMITH     |
+|         27 |           1 |   0.99 | MARY       | SMITH     |
+|         28 |           1 |   2.99 | MARY       | SMITH     |
+|         29 |           1 |   0.99 | MARY       | SMITH     |
+|         30 |           1 |   1.99 | MARY       | SMITH     |
+|         31 |           1 |   2.99 | MARY       | SMITH     |
+|         32 |           1 |   5.99 | MARY       | SMITH     |
+|         33 |           2 |   4.99 | PATRICIA   | JOHNSON   |
+|         34 |           2 |   2.99 | PATRICIA   | JOHNSON   |
+|         35 |           2 |   2.99 | PATRICIA   | JOHNSON   |
+|         36 |           2 |   6.99 | PATRICIA   | JOHNSON   |
+|         37 |           2 |   4.99 | PATRICIA   | JOHNSON   |
+|         38 |           2 |   5.99 | PATRICIA   | JOHNSON   |
+|         39 |           2 |   5.99 | PATRICIA   | JOHNSON   |
+|         40 |           2 |   5.99 | PATRICIA   | JOHNSON   |
+|         41 |           2 |   2.99 | PATRICIA   | JOHNSON   |
+|         42 |           2 |   5.99 | PATRICIA   | JOHNSON   |
+|         43 |           2 |   4.99 | PATRICIA   | JOHNSON   |
+|         44 |           2 |  10.99 | PATRICIA   | JOHNSON   |
+|         45 |           2 |   0.99 | PATRICIA   | JOHNSON   |
+|         46 |           2 |   6.99 | PATRICIA   | JOHNSON   |
+|         47 |           2 |   6.99 | PATRICIA   | JOHNSON   |
+|         48 |           2 |   2.99 | PATRICIA   | JOHNSON   |
+|         49 |           2 |   0.99 | PATRICIA   | JOHNSON   |
+|         50 |           2 |   0.99 | PATRICIA   | JOHNSON   |
++------------+-------------+--------+------------+-----------+
+50 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > use world;
+Default schema set to `world`.
+Fetching global names, object names from `world` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  world  SQL > select * from city limit 20;
++----+------------------+-------------+---------------+------------+
+| ID | Name             | CountryCode | District      | Population |
++----+------------------+-------------+---------------+------------+
+|  1 | Kabul            | AFG         | Kabol         |    1780000 |
+|  2 | Qandahar         | AFG         | Qandahar      |     237500 |
+|  3 | Herat            | AFG         | Herat         |     186800 |
+|  4 | Mazar-e-Sharif   | AFG         | Balkh         |     127800 |
+|  5 | Amsterdam        | NLD         | Noord-Holland |     731200 |
+|  6 | Rotterdam        | NLD         | Zuid-Holland  |     593321 |
+|  7 | Haag             | NLD         | Zuid-Holland  |     440900 |
+|  8 | Utrecht          | NLD         | Utrecht       |     234323 |
+|  9 | Eindhoven        | NLD         | Noord-Brabant |     201843 |
+| 10 | Tilburg          | NLD         | Noord-Brabant |     193238 |
+| 11 | Groningen        | NLD         | Groningen     |     172701 |
+| 12 | Breda            | NLD         | Noord-Brabant |     160398 |
+| 13 | Apeldoorn        | NLD         | Gelderland    |     153491 |
+| 14 | Nijmegen         | NLD         | Gelderland    |     152463 |
+| 15 | Enschede         | NLD         | Overijssel    |     149544 |
+| 16 | Haarlem          | NLD         | Noord-Holland |     148772 |
+| 17 | Almere           | NLD         | Flevoland     |     142465 |
+| 18 | Arnhem           | NLD         | Gelderland    |     138020 |
+| 19 | Zaanstad         | NLD         | Noord-Holland |     135621 |
+| 20 | ´s-Hertogenbosch | NLD         | Noord-Brabant |     129170 |
++----+------------------+-------------+---------------+------------+
+20 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.id, a.name, a.population, b.name from city a
+                                      -> inner join country b on a.countrycode = b.code limit 50;
++-----+-----------------------+------------+----------------------+
+| id  | name                  | population | name                 |
++-----+-----------------------+------------+----------------------+
+| 129 | Oranjestad            |      29034 | Aruba                |
+|   1 | Kabul                 |    1780000 | Afghanistan          |
+|   2 | Qandahar              |     237500 | Afghanistan          |
+|   3 | Herat                 |     186800 | Afghanistan          |
+|   4 | Mazar-e-Sharif        |     127800 | Afghanistan          |
+|  56 | Luanda                |    2022000 | Angola               |
+|  57 | Huambo                |     163100 | Angola               |
+|  58 | Lobito                |     130000 | Angola               |
+|  59 | Benguela              |     128300 | Angola               |
+|  60 | Namibe                |     118200 | Angola               |
+|  61 | South Hill            |        961 | Anguilla             |
+|  62 | The Valley            |        595 | Anguilla             |
+|  34 | Tirana                |     270000 | Albania              |
+|  55 | Andorra la Vella      |      21189 | Andorra              |
+|  33 | Willemstad            |       2345 | Netherlands Antilles |
+|  64 | Dubai                 |     669181 | United Arab Emirates |
+|  65 | Abu Dhabi             |     398695 | United Arab Emirates |
+|  66 | Sharja                |     320095 | United Arab Emirates |
+|  67 | al-Ayn                |     225970 | United Arab Emirates |
+|  68 | Ajman                 |     114395 | United Arab Emirates |
+|  69 | Buenos Aires          |    2982146 | Argentina            |
+|  70 | La Matanza            |    1266461 | Argentina            |
+|  71 | Córdoba               |    1157507 | Argentina            |
+|  72 | Rosario               |     907718 | Argentina            |
+|  73 | Lomas de Zamora       |     622013 | Argentina            |
+|  74 | Quilmes               |     559249 | Argentina            |
+|  75 | Almirante Brown       |     538918 | Argentina            |
+|  76 | La Plata              |     521936 | Argentina            |
+|  77 | Mar del Plata         |     512880 | Argentina            |
+|  78 | San Miguel de Tucumán |     470809 | Argentina            |
+|  79 | Lanús                 |     469735 | Argentina            |
+|  80 | Merlo                 |     463846 | Argentina            |
+|  81 | General San Martín    |     422542 | Argentina            |
+|  82 | Salta                 |     367550 | Argentina            |
+|  83 | Moreno                |     356993 | Argentina            |
+|  84 | Santa Fé              |     353063 | Argentina            |
+|  85 | Avellaneda            |     353046 | Argentina            |
+|  86 | Tres de Febrero       |     352311 | Argentina            |
+|  87 | Morón                 |     349246 | Argentina            |
+|  88 | Florencio Varela      |     315432 | Argentina            |
+|  89 | San Isidro            |     306341 | Argentina            |
+|  90 | Tigre                 |     296226 | Argentina            |
+|  91 | Malvinas Argentinas   |     290335 | Argentina            |
+|  92 | Vicente López         |     288341 | Argentina            |
+|  93 | Berazategui           |     276916 | Argentina            |
+|  94 | Corrientes            |     258103 | Argentina            |
+|  95 | San Miguel            |     248700 | Argentina            |
+|  96 | Bahía Blanca          |     239810 | Argentina            |
+|  97 | Esteban Echeverría    |     235760 | Argentina            |
+|  98 | Resistencia           |     229212 | Argentina            |
++-----+-----------------------+------------+----------------------+
+50 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, b.language from country a inner join countrylanguage b on a.code = b.countrycode limit 50;
++----------------------+------------------+
+| name                 | language         |
++----------------------+------------------+
+| Aruba                | Dutch            |
+| Aruba                | English          |
+| Aruba                | Papiamento       |
+| Aruba                | Spanish          |
+| Afghanistan          | Balochi          |
+| Afghanistan          | Dari             |
+| Afghanistan          | Pashto           |
+| Afghanistan          | Turkmenian       |
+| Afghanistan          | Uzbek            |
+| Angola               | Ambo             |
+| Angola               | Chokwe           |
+| Angola               | Kongo            |
+| Angola               | Luchazi          |
+| Angola               | Luimbe-nganguela |
+| Angola               | Luvale           |
+| Angola               | Mbundu           |
+| Angola               | Nyaneka-nkhumbi  |
+| Angola               | Ovimbundu        |
+| Anguilla             | English          |
+| Albania              | Albaniana        |
+| Albania              | Greek            |
+| Albania              | Macedonian       |
+| Andorra              | Catalan          |
+| Andorra              | French           |
+| Andorra              | Portuguese       |
+| Andorra              | Spanish          |
+| Netherlands Antilles | Dutch            |
+| Netherlands Antilles | English          |
+| Netherlands Antilles | Papiamento       |
+| United Arab Emirates | Arabic           |
+| United Arab Emirates | Hindi            |
+| Argentina            | Indian Languages |
+| Argentina            | Italian          |
+| Argentina            | Spanish          |
+| Armenia              | Armenian         |
+| Armenia              | Azerbaijani      |
+| American Samoa       | English          |
+| American Samoa       | Samoan           |
+| American Samoa       | Tongan           |
+| Antigua and Barbuda  | Creole English   |
+| Antigua and Barbuda  | English          |
+| Australia            | Arabic           |
+| Australia            | Canton Chinese   |
+| Australia            | English          |
+| Australia            | German           |
+| Australia            | Greek            |
+| Australia            | Italian          |
+| Australia            | Serbo-Croatian   |
+| Australia            | Vietnamese       |
+| Austria              | Czech            |
++----------------------+------------------+
+50 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc city;
++-------------+----------+------+-----+---------+----------------+
+| Field       | Type     | Null | Key | Default | Extra          |
++-------------+----------+------+-----+---------+----------------+
+| ID          | int      | NO   | PRI | NULL    | auto_increment |
+| Name        | char(35) | NO   |     |         |                |
+| CountryCode | char(3)  | NO   | MUL |         |                |
+| District    | char(20) | NO   |     |         |                |
+| Population  | int      | NO   |     | 0       |                |
++-------------+----------+------+-----+---------+----------------+
+5 rows in set (0.0019 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc country;
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type                                                                                  | Null | Key | Default | Extra |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)                                                                               | NO   | PRI |         |       |
+| Name           | char(52)                                                                              | NO   |     |         |       |
+| Continent      | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') | NO   |     | Asia    |       |
+| Region         | char(26)                                                                              | NO   |     |         |       |
+| SurfaceArea    | decimal(10,2)                                                                         | NO   |     | 0.00    |       |
+| IndepYear      | smallint                                                                              | YES  |     | NULL    |       |
+| Population     | int                                                                                   | NO   |     | 0       |       |
+| LifeExpectancy | decimal(3,1)                                                                          | YES  |     | NULL    |       |
+| GNP            | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| GNPOld         | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| LocalName      | char(45)                                                                              | NO   |     |         |       |
+| GovernmentForm | char(45)                                                                              | NO   |     |         |       |
+| HeadOfState    | char(60)                                                                              | YES  |     | NULL    |       |
+| Capital        | int                                                                                   | YES  |     | NULL    |       |
+| Code2          | char(2)                                                                               | NO   |     |         |       |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc countrylanguage;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| CountryCode | char(3)       | NO   | PRI |         |       |
+| Language    | char(30)      | NO   | PRI |         |       |
+| IsOfficial  | enum('T','F') | NO   |     | F       |       |
+| Percentage  | decimal(4,1)  | NO   |     | 0.0     |       |
++-------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, b.name, c.language from city a inner join country b
+                                      -> on b.code = a.countrycode
+                                      -> inner join countrylanguage c on c.countrycode = a.countrycode limit 50;
++----------------+-------------+------------------+
+| name           | name        | language         |
++----------------+-------------+------------------+
+| Oranjestad     | Aruba       | Dutch            |
+| Oranjestad     | Aruba       | English          |
+| Oranjestad     | Aruba       | Papiamento       |
+| Oranjestad     | Aruba       | Spanish          |
+| Kabul          | Afghanistan | Balochi          |
+| Kabul          | Afghanistan | Dari             |
+| Kabul          | Afghanistan | Pashto           |
+| Kabul          | Afghanistan | Turkmenian       |
+| Kabul          | Afghanistan | Uzbek            |
+| Qandahar       | Afghanistan | Balochi          |
+| Qandahar       | Afghanistan | Dari             |
+| Qandahar       | Afghanistan | Pashto           |
+| Qandahar       | Afghanistan | Turkmenian       |
+| Qandahar       | Afghanistan | Uzbek            |
+| Herat          | Afghanistan | Balochi          |
+| Herat          | Afghanistan | Dari             |
+| Herat          | Afghanistan | Pashto           |
+| Herat          | Afghanistan | Turkmenian       |
+| Herat          | Afghanistan | Uzbek            |
+| Mazar-e-Sharif | Afghanistan | Balochi          |
+| Mazar-e-Sharif | Afghanistan | Dari             |
+| Mazar-e-Sharif | Afghanistan | Pashto           |
+| Mazar-e-Sharif | Afghanistan | Turkmenian       |
+| Mazar-e-Sharif | Afghanistan | Uzbek            |
+| Luanda         | Angola      | Ambo             |
+| Luanda         | Angola      | Chokwe           |
+| Luanda         | Angola      | Kongo            |
+| Luanda         | Angola      | Luchazi          |
+| Luanda         | Angola      | Luimbe-nganguela |
+| Luanda         | Angola      | Luvale           |
+| Luanda         | Angola      | Mbundu           |
+| Luanda         | Angola      | Nyaneka-nkhumbi  |
+| Luanda         | Angola      | Ovimbundu        |
+| Huambo         | Angola      | Ambo             |
+| Huambo         | Angola      | Chokwe           |
+| Huambo         | Angola      | Kongo            |
+| Huambo         | Angola      | Luchazi          |
+| Huambo         | Angola      | Luimbe-nganguela |
+| Huambo         | Angola      | Luvale           |
+| Huambo         | Angola      | Mbundu           |
+| Huambo         | Angola      | Nyaneka-nkhumbi  |
+| Huambo         | Angola      | Ovimbundu        |
+| Lobito         | Angola      | Ambo             |
+| Lobito         | Angola      | Chokwe           |
+| Lobito         | Angola      | Kongo            |
+| Lobito         | Angola      | Luchazi          |
+| Lobito         | Angola      | Luimbe-nganguela |
+| Lobito         | Angola      | Luvale           |
+| Lobito         | Angola      | Mbundu           |
+| Lobito         | Angola      | Nyaneka-nkhumbi  |
++----------------+-------------+------------------+
+50 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a. name, b.name, c.language from city a inner join country b on b.code = countrycode inner join countrylanguage c on c.countrycode = a.countrycode where b.name like "M%" limit 50;
++-------------+---------------------------------+------------------+
+| name        | name                            | language         |
++-------------+---------------------------------+------------------+
+| Weno        | Micronesia, Federated States of | Kosrean          |
+| Weno        | Micronesia, Federated States of | Mortlock         |
+| Weno        | Micronesia, Federated States of | Pohnpei          |
+| Weno        | Micronesia, Federated States of | Trukese          |
+| Weno        | Micronesia, Federated States of | Wolea            |
+| Weno        | Micronesia, Federated States of | Yap              |
+| Palikir     | Micronesia, Federated States of | Kosrean          |
+| Palikir     | Micronesia, Federated States of | Mortlock         |
+| Palikir     | Micronesia, Federated States of | Pohnpei          |
+| Palikir     | Micronesia, Federated States of | Trukese          |
+| Palikir     | Micronesia, Federated States of | Wolea            |
+| Palikir     | Micronesia, Federated States of | Yap              |
+| Macao       | Macao                           | Canton Chinese   |
+| Macao       | Macao                           | English          |
+| Macao       | Macao                           | Mandarin Chinese |
+| Macao       | Macao                           | Portuguese       |
+| Casablanca  | Morocco                         | Arabic           |
+| Casablanca  | Morocco                         | Berberi          |
+| Rabat       | Morocco                         | Arabic           |
+| Rabat       | Morocco                         | Berberi          |
+| Marrakech   | Morocco                         | Arabic           |
+| Marrakech   | Morocco                         | Berberi          |
+| Fès         | Morocco                         | Arabic           |
+| Fès         | Morocco                         | Berberi          |
+| Tanger      | Morocco                         | Arabic           |
+| Tanger      | Morocco                         | Berberi          |
+| Salé        | Morocco                         | Arabic           |
+| Salé        | Morocco                         | Berberi          |
+| Meknès      | Morocco                         | Arabic           |
+| Meknès      | Morocco                         | Berberi          |
+| Oujda       | Morocco                         | Arabic           |
+| Oujda       | Morocco                         | Berberi          |
+| Kénitra     | Morocco                         | Arabic           |
+| Kénitra     | Morocco                         | Berberi          |
+| Tétouan     | Morocco                         | Arabic           |
+| Tétouan     | Morocco                         | Berberi          |
+| Safi        | Morocco                         | Arabic           |
+| Safi        | Morocco                         | Berberi          |
+| Agadir      | Morocco                         | Arabic           |
+| Agadir      | Morocco                         | Berberi          |
+| Mohammedia  | Morocco                         | Arabic           |
+| Mohammedia  | Morocco                         | Berberi          |
+| Khouribga   | Morocco                         | Arabic           |
+| Khouribga   | Morocco                         | Berberi          |
+| Beni-Mellal | Morocco                         | Arabic           |
+| Beni-Mellal | Morocco                         | Berberi          |
+| Témara      | Morocco                         | Arabic           |
+| Témara      | Morocco                         | Berberi          |
+| El Jadida   | Morocco                         | Arabic           |
+| El Jadida   | Morocco                         | Berberi          |
++-------------+---------------------------------+------------------+
+50 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc country;
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type                                                                                  | Null | Key | Default | Extra |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)                                                                               | NO   | PRI |         |       |
+| Name           | char(52)                                                                              | NO   |     |         |       |
+| Continent      | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') | NO   |     | Asia    |       |
+| Region         | char(26)                                                                              | NO   |     |         |       |
+| SurfaceArea    | decimal(10,2)                                                                         | NO   |     | 0.00    |       |
+| IndepYear      | smallint                                                                              | YES  |     | NULL    |       |
+| Population     | int                                                                                   | NO   |     | 0       |       |
+| LifeExpectancy | decimal(3,1)                                                                          | YES  |     | NULL    |       |
+| GNP            | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| GNPOld         | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| LocalName      | char(45)                                                                              | NO   |     |         |       |
+| GovernmentForm | char(45)                                                                              | NO   |     |         |       |
+| HeadOfState    | char(60)                                                                              | YES  |     | NULL    |       |
+| Capital        | int                                                                                   | YES  |     | NULL    |       |
+| Code2          | char(2)                                                                               | NO   |     |         |       |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.0017 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc countrylanguage;
++-------------+---------------+------+-----+---------+-------+
+| Field       | Type          | Null | Key | Default | Extra |
++-------------+---------------+------+-----+---------+-------+
+| CountryCode | char(3)       | NO   | PRI |         |       |
+| Language    | char(30)      | NO   | PRI |         |       |
+| IsOfficial  | enum('T','F') | NO   |     | F       |       |
+| Percentage  | decimal(4,1)  | NO   |     | 0.0     |       |
++-------------+---------------+------+-----+---------+-------+
+4 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a. name, b.name, c.language from city a inner join country b on b.code = countrycode inner join countrylanguage c on c.countrycode = a.countrycode where c.isofficial = "T" limit 50;
++-----------------------+----------------------+------------+
+| name                  | name                 | language   |
++-----------------------+----------------------+------------+
+| Oranjestad            | Aruba                | Dutch      |
+| Kabul                 | Afghanistan          | Dari       |
+| Qandahar              | Afghanistan          | Dari       |
+| Herat                 | Afghanistan          | Dari       |
+| Mazar-e-Sharif        | Afghanistan          | Dari       |
+| Kabul                 | Afghanistan          | Pashto     |
+| Qandahar              | Afghanistan          | Pashto     |
+| Herat                 | Afghanistan          | Pashto     |
+| Mazar-e-Sharif        | Afghanistan          | Pashto     |
+| South Hill            | Anguilla             | English    |
+| The Valley            | Anguilla             | English    |
+| Tirana                | Albania              | Albaniana  |
+| Andorra la Vella      | Andorra              | Catalan    |
+| Willemstad            | Netherlands Antilles | Dutch      |
+| Willemstad            | Netherlands Antilles | Papiamento |
+| Dubai                 | United Arab Emirates | Arabic     |
+| Abu Dhabi             | United Arab Emirates | Arabic     |
+| Sharja                | United Arab Emirates | Arabic     |
+| al-Ayn                | United Arab Emirates | Arabic     |
+| Ajman                 | United Arab Emirates | Arabic     |
+| Buenos Aires          | Argentina            | Spanish    |
+| La Matanza            | Argentina            | Spanish    |
+| Córdoba               | Argentina            | Spanish    |
+| Rosario               | Argentina            | Spanish    |
+| Lomas de Zamora       | Argentina            | Spanish    |
+| Quilmes               | Argentina            | Spanish    |
+| Almirante Brown       | Argentina            | Spanish    |
+| La Plata              | Argentina            | Spanish    |
+| Mar del Plata         | Argentina            | Spanish    |
+| San Miguel de Tucumán | Argentina            | Spanish    |
+| Lanús                 | Argentina            | Spanish    |
+| Merlo                 | Argentina            | Spanish    |
+| General San Martín    | Argentina            | Spanish    |
+| Salta                 | Argentina            | Spanish    |
+| Moreno                | Argentina            | Spanish    |
+| Santa Fé              | Argentina            | Spanish    |
+| Avellaneda            | Argentina            | Spanish    |
+| Tres de Febrero       | Argentina            | Spanish    |
+| Morón                 | Argentina            | Spanish    |
+| Florencio Varela      | Argentina            | Spanish    |
+| San Isidro            | Argentina            | Spanish    |
+| Tigre                 | Argentina            | Spanish    |
+| Malvinas Argentinas   | Argentina            | Spanish    |
+| Vicente López         | Argentina            | Spanish    |
+| Berazategui           | Argentina            | Spanish    |
+| Corrientes            | Argentina            | Spanish    |
+| San Miguel            | Argentina            | Spanish    |
+| Bahía Blanca          | Argentina            | Spanish    |
+| Esteban Echeverría    | Argentina            | Spanish    |
+| Resistencia           | Argentina            | Spanish    |
++-----------------------+----------------------+------------+
+50 rows in set (0.0012 sec)
+ MySQL  localhost:3306 ssl  world  SQL > use tbd_eva2;
+Default schema set to `tbd_eva2`.
+Fetching global names, object names from `tbd_eva2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.nombre, c.cantidad from cliente a inner join factura d
+                                         -> on a.id = d.idcliente
+                                         -> inner join factura_detalle c on d.folio = c.idfactura inner join producto b c.idproducto = b.id;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'c.idproducto = b.id' at line 3
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.nombre, c.cantidad from cliente a inner join factura d on a.id = d.idcliente  inner join factura_detalle c on d.folio = c.idfactura inner join producto b on c.idproducto = b.id;
++---------+----------+--------+----------+
+| nombre  | apellido | nombre | cantidad |
++---------+----------+--------+----------+
+| charli  | xcx      | elote  |        5 |
+| shakira | melbarak | nachos |       60 |
+| shakira | melbarak | elote  |        3 |
+| charli  | xcx      | nachos |       10 |
++---------+----------+--------+----------+
+4 rows in set (0.0021 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL >
