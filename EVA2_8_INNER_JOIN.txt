@@ -1,0 +1,1645 @@
+EVA2_8_INNER_JOIN
+
+MySQL Shell 8.0.37
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 11
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > skow databases;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'skow databases' at line 1
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| tbd_eva1           |
+| tbd_eva2           |
+| veterinaria_bd     |
+| veterinaria_schema |
+| world              |
++--------------------+
+10 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  SQL > use sakila;
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > desc payment;
++--------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field        | Type              | Null | Key | Default           | Extra                                         |
++--------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| payment_id   | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| customer_id  | smallint unsigned | NO   | MUL | NULL              |                                               |
+| staff_id     | tinyint unsigned  | NO   | MUL | NULL              |                                               |
+| rental_id    | int               | YES  | MUL | NULL              |                                               |
+| amount       | decimal(5,2)      | NO   |     | NULL              |                                               |
+| payment_date | datetime          | NO   |     | NULL              |                                               |
+| last_update  | timestamp         | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++--------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+7 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > desc customer;
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| Field       | Type              | Null | Key | Default           | Extra                                         |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+| customer_id | smallint unsigned | NO   | PRI | NULL              | auto_increment                                |
+| store_id    | tinyint unsigned  | NO   | MUL | NULL              |                                               |
+| first_name  | varchar(45)       | NO   |     | NULL              |                                               |
+| last_name   | varchar(45)       | NO   | MUL | NULL              |                                               |
+| email       | varchar(50)       | YES  |     | NULL              |                                               |
+| address_id  | smallint unsigned | NO   | MUL | NULL              |                                               |
+| active      | tinyint(1)        | NO   |     | 1                 |                                               |
+| create_date | datetime          | NO   |     | NULL              |                                               |
+| last_update | timestamp         | YES  |     | CURRENT_TIMESTAMP | DEFAULT_GENERATED on update CURRENT_TIMESTAMP |
++-------------+-------------------+------+-----+-------------------+-----------------------------------------------+
+9 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select a.amount, a.customer_id, b.first_name, b.last_name from payment a
+                                       -> inner join customer b on a.customer_id = b.customer_id limit 50;
++--------+-------------+------------+-----------+
+| amount | customer_id | first_name | last_name |
++--------+-------------+------------+-----------+
+|   2.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   5.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   9.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   3.99 |           1 | MARY       | SMITH     |
+|   5.99 |           1 | MARY       | SMITH     |
+|   5.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   7.99 |           1 | MARY       | SMITH     |
+|   2.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   2.99 |           1 | MARY       | SMITH     |
+|   2.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   3.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   4.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   2.99 |           1 | MARY       | SMITH     |
+|   0.99 |           1 | MARY       | SMITH     |
+|   1.99 |           1 | MARY       | SMITH     |
+|   2.99 |           1 | MARY       | SMITH     |
+|   5.99 |           1 | MARY       | SMITH     |
+|   4.99 |           2 | PATRICIA   | JOHNSON   |
+|   2.99 |           2 | PATRICIA   | JOHNSON   |
+|   2.99 |           2 | PATRICIA   | JOHNSON   |
+|   6.99 |           2 | PATRICIA   | JOHNSON   |
+|   4.99 |           2 | PATRICIA   | JOHNSON   |
+|   5.99 |           2 | PATRICIA   | JOHNSON   |
+|   5.99 |           2 | PATRICIA   | JOHNSON   |
+|   5.99 |           2 | PATRICIA   | JOHNSON   |
+|   2.99 |           2 | PATRICIA   | JOHNSON   |
+|   5.99 |           2 | PATRICIA   | JOHNSON   |
+|   4.99 |           2 | PATRICIA   | JOHNSON   |
+|  10.99 |           2 | PATRICIA   | JOHNSON   |
+|   0.99 |           2 | PATRICIA   | JOHNSON   |
+|   6.99 |           2 | PATRICIA   | JOHNSON   |
+|   6.99 |           2 | PATRICIA   | JOHNSON   |
+|   2.99 |           2 | PATRICIA   | JOHNSON   |
+|   0.99 |           2 | PATRICIA   | JOHNSON   |
+|   0.99 |           2 | PATRICIA   | JOHNSON   |
++--------+-------------+------------+-----------+
+50 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select sum(a.amount), a.customer_id, b.first_name, b.last_name from payment a inner join customer b on a.customer_id = b.customer_id group by a.customer_id limit 50;
++---------------+-------------+------------+-----------+
+| sum(a.amount) | customer_id | first_name | last_name |
++---------------+-------------+------------+-----------+
+|        118.68 |           1 | MARY       | SMITH     |
+|        128.73 |           2 | PATRICIA   | JOHNSON   |
+|        135.74 |           3 | LINDA      | WILLIAMS  |
+|         81.78 |           4 | BARBARA    | JONES     |
+|        144.62 |           5 | ELIZABETH  | BROWN     |
+|         93.72 |           6 | JENNIFER   | DAVIS     |
+|        151.67 |           7 | MARIA      | MILLER    |
+|         92.76 |           8 | SUSAN      | WILSON    |
+|         89.77 |           9 | MARGARET   | MOORE     |
+|         99.75 |          10 | DOROTHY    | TAYLOR    |
+|        106.76 |          11 | LISA       | ANDERSON  |
+|        103.72 |          12 | NANCY      | THOMAS    |
+|        131.73 |          13 | KAREN      | JACKSON   |
+|        117.72 |          14 | BETTY      | WHITE     |
+|        134.68 |          15 | HELEN      | HARRIS    |
+|        118.72 |          16 | SANDRA     | MARTIN    |
+|         98.79 |          17 | DONNA      | THOMPSON  |
+|         91.78 |          18 | CAROL      | GARCIA    |
+|        125.76 |          19 | RUTH       | MARTINEZ  |
+|        115.70 |          20 | SHARON     | ROBINSON  |
+|        155.65 |          21 | MICHELLE   | CLARK     |
+|        113.78 |          22 | LAURA      | RODRIGUEZ |
+|        119.70 |          23 | SARAH      | LEWIS     |
+|         95.75 |          24 | KIMBERLY   | LEE       |
+|        115.71 |          25 | DEBORAH    | WALKER    |
+|        152.66 |          26 | JESSICA    | HALL      |
+|        126.69 |          27 | SHIRLEY    | ALLEN     |
+|        111.68 |          28 | CYNTHIA    | YOUNG     |
+|        140.64 |          29 | ANGELA     | HERNANDEZ |
+|        123.66 |          30 | MELISSA    | KING      |
+|        104.74 |          31 | BRENDA     | WRIGHT    |
+|        127.71 |          32 | AMY        | LOPEZ     |
+|         91.79 |          33 | ANNA       | HILL      |
+|         89.76 |          34 | REBECCA    | SCOTT     |
+|        129.68 |          35 | VIRGINIA   | GREEN     |
+|         92.73 |          36 | KATHLEEN   | ADAMS     |
+|         95.77 |          37 | PAMELA     | BAKER     |
+|        127.66 |          38 | MARTHA     | GONZALEZ  |
+|        141.71 |          39 | DEBRA      | NELSON    |
+|        110.73 |          40 | AMANDA     | CARTER    |
+|        118.75 |          41 | STEPHANIE  | MITCHELL  |
+|        117.70 |          42 | CAROLYN    | PEREZ     |
+|         99.76 |          43 | CHRISTINE  | ROBERTS   |
+|        114.74 |          44 | MARIE      | TURNER    |
+|        127.73 |          45 | JANET      | PHILLIPS  |
+|        142.66 |          46 | CATHERINE  | CAMPBELL  |
+|        108.78 |          47 | FRANCES    | PARKER    |
+|         76.83 |          48 | ANN        | EVANS     |
+|        130.72 |          49 | JOYCE      | EDWARDS   |
+|        169.65 |          50 | DIANE      | COLLINS   |
++---------------+-------------+------------+-----------+
+50 rows in set (0.0142 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select sum(a.amount), a.customer_id, b.first_name, b.last_name from payment a inner join customer b on a.customer_id = b.customer_id group by a.customer_id;
++---------------+-------------+-------------+--------------+
+| sum(a.amount) | customer_id | first_name  | last_name    |
++---------------+-------------+-------------+--------------+
+|        118.68 |           1 | MARY        | SMITH        |
+|        128.73 |           2 | PATRICIA    | JOHNSON      |
+|        135.74 |           3 | LINDA       | WILLIAMS     |
+|         81.78 |           4 | BARBARA     | JONES        |
+|        144.62 |           5 | ELIZABETH   | BROWN        |
+|         93.72 |           6 | JENNIFER    | DAVIS        |
+|        151.67 |           7 | MARIA       | MILLER       |
+|         92.76 |           8 | SUSAN       | WILSON       |
+|         89.77 |           9 | MARGARET    | MOORE        |
+|         99.75 |          10 | DOROTHY     | TAYLOR       |
+|        106.76 |          11 | LISA        | ANDERSON     |
+|        103.72 |          12 | NANCY       | THOMAS       |
+|        131.73 |          13 | KAREN       | JACKSON      |
+|        117.72 |          14 | BETTY       | WHITE        |
+|        134.68 |          15 | HELEN       | HARRIS       |
+|        118.72 |          16 | SANDRA      | MARTIN       |
+|         98.79 |          17 | DONNA       | THOMPSON     |
+|         91.78 |          18 | CAROL       | GARCIA       |
+|        125.76 |          19 | RUTH        | MARTINEZ     |
+|        115.70 |          20 | SHARON      | ROBINSON     |
+|        155.65 |          21 | MICHELLE    | CLARK        |
+|        113.78 |          22 | LAURA       | RODRIGUEZ    |
+|        119.70 |          23 | SARAH       | LEWIS        |
+|         95.75 |          24 | KIMBERLY    | LEE          |
+|        115.71 |          25 | DEBORAH     | WALKER       |
+|        152.66 |          26 | JESSICA     | HALL         |
+|        126.69 |          27 | SHIRLEY     | ALLEN        |
+|        111.68 |          28 | CYNTHIA     | YOUNG        |
+|        140.64 |          29 | ANGELA      | HERNANDEZ    |
+|        123.66 |          30 | MELISSA     | KING         |
+|        104.74 |          31 | BRENDA      | WRIGHT       |
+|        127.71 |          32 | AMY         | LOPEZ        |
+|         91.79 |          33 | ANNA        | HILL         |
+|         89.76 |          34 | REBECCA     | SCOTT        |
+|        129.68 |          35 | VIRGINIA    | GREEN        |
+|         92.73 |          36 | KATHLEEN    | ADAMS        |
+|         95.77 |          37 | PAMELA      | BAKER        |
+|        127.66 |          38 | MARTHA      | GONZALEZ     |
+|        141.71 |          39 | DEBRA       | NELSON       |
+|        110.73 |          40 | AMANDA      | CARTER       |
+|        118.75 |          41 | STEPHANIE   | MITCHELL     |
+|        117.70 |          42 | CAROLYN     | PEREZ        |
+|         99.76 |          43 | CHRISTINE   | ROBERTS      |
+|        114.74 |          44 | MARIE       | TURNER       |
+|        127.73 |          45 | JANET       | PHILLIPS     |
+|        142.66 |          46 | CATHERINE   | CAMPBELL     |
+|        108.78 |          47 | FRANCES     | PARKER       |
+|         76.83 |          48 | ANN         | EVANS        |
+|        130.72 |          49 | JOYCE       | EDWARDS      |
+|        169.65 |          50 | DIANE       | COLLINS      |
+|        138.67 |          51 | ALICE       | STEWART      |
+|        107.71 |          52 | JULIE       | SANCHEZ      |
+|        115.70 |          53 | HEATHER     | MORRIS       |
+|        128.71 |          54 | TERESA      | ROGERS       |
+|        100.78 |          55 | DORIS       | REED         |
+|        135.70 |          56 | GLORIA      | COOK         |
+|        114.72 |          57 | EVELYN      | MORGAN       |
+|        115.73 |          58 | JEAN        | BELL         |
+|        133.73 |          59 | CHERYL      | MURPHY       |
+|         98.75 |          60 | MILDRED     | BAILEY       |
+|         58.86 |          61 | KATHERINE   | RIVERA       |
+|         84.77 |          62 | JOAN        | COOPER       |
+|        112.75 |          63 | ASHLEY      | RICHARDSON   |
+|        100.67 |          64 | JUDITH      | COX          |
+|        103.78 |          65 | ROSE        | HOWARD       |
+|        144.66 |          66 | JANICE      | WARD         |
+|         99.78 |          67 | KELLY       | TORRES       |
+|         94.78 |          68 | NICOLE      | PETERSON     |
+|         96.75 |          69 | JUDY        | GRAY         |
+|         80.82 |          70 | CHRISTINA   | RAMIREZ      |
+|        129.70 |          71 | KATHY       | JAMES        |
+|         99.70 |          72 | THERESA     | WATSON       |
+|         97.76 |          73 | BEVERLY     | BROOKS       |
+|        103.73 |          74 | DENISE      | KELLY        |
+|        155.59 |          75 | TAMMY       | SANDERS      |
+|         77.77 |          76 | IRENE       | PRICE        |
+|        100.72 |          77 | JANE        | BENNETT      |
+|        141.69 |          78 | LORI        | WOOD         |
+|         84.78 |          79 | RACHEL      | BARNES       |
+|        137.70 |          80 | MARILYN     | ROSS         |
+|         93.78 |          81 | ANDREA      | HENDERSON    |
+|        130.74 |          82 | KATHRYN     | COLEMAN      |
+|        101.75 |          83 | LOUISE      | JENKINS      |
+|        141.67 |          84 | SARA        | PERRY        |
+|         87.77 |          85 | ANNE        | POWELL       |
+|        148.67 |          86 | JACQUELINE  | LONG         |
+|        145.70 |          87 | WANDA       | PATTERSON    |
+|         87.79 |          88 | BONNIE      | HUGHES       |
+|        134.68 |          89 | JULIA       | FLORES       |
+|        110.72 |          90 | RUBY        | WASHINGTON   |
+|        113.65 |          91 | LOIS        | BUTLER       |
+|        133.72 |          92 | TINA        | SIMMONS      |
+|         91.77 |          93 | PHYLLIS     | FOSTER       |
+|         79.79 |          94 | NORMA       | GONZALES     |
+|         77.82 |          95 | PAULA       | BRYANT       |
+|        105.73 |          96 | DIANA       | ALEXANDER    |
+|         58.82 |          97 | ANNIE       | RUSSELL      |
+|        106.75 |          98 | LILLIAN     | GRIFFIN      |
+|         91.76 |          99 | EMILY       | DIAZ         |
+|        102.76 |         100 | ROBIN       | HAYES        |
+|         96.76 |         101 | PEGGY       | MYERS        |
+|        137.67 |         102 | CRYSTAL     | FORD         |
+|        146.69 |         103 | GLADYS      | HAMILTON     |
+|         92.76 |         104 | RITA        | GRAHAM       |
+|        120.74 |         105 | DAWN        | SULLIVAN     |
+|        100.77 |         106 | CONNIE      | WALLACE      |
+|        126.70 |         107 | FLORENCE    | WOODS        |
+|        132.70 |         108 | TRACY       | COLE         |
+|        107.74 |         109 | EDNA        | WEST         |
+|         59.86 |         110 | TIFFANY     | JORDAN       |
+|         97.74 |         111 | CARMEN      | OWENS        |
+|        133.70 |         112 | ROSA        | REYNOLDS     |
+|        113.71 |         113 | CINDY       | FISHER       |
+|        139.67 |         114 | GRACE       | ELLIS        |
+|         91.70 |         115 | WENDY       | HARRISON     |
+|        111.73 |         116 | VICTORIA    | GIBSON       |
+|         71.81 |         117 | EDITH       | MCDONALD     |
+|         82.79 |         118 | KIM         | CRUZ         |
+|        153.66 |         119 | SHERRY      | MARSHALL     |
+|        143.68 |         120 | SYLVIA      | ORTIZ        |
+|        109.74 |         121 | JOSEPHINE   | GOMEZ        |
+|        126.68 |         122 | THELMA      | MURRAY       |
+|        100.76 |         123 | SHANNON     | FREEMAN      |
+|         73.82 |         124 | SHEILA      | WELLS        |
+|        135.68 |         125 | ETHEL       | WEBB         |
+|        117.72 |         126 | ELLEN       | SIMPSON      |
+|        107.76 |         127 | ELAINE      | STEVENS      |
+|        127.68 |         128 | MARJORIE    | TUCKER       |
+|        124.66 |         129 | CARRIE      | PORTER       |
+|         93.76 |         130 | CHARLOTTE   | HUNTER       |
+|        128.70 |         131 | MONICA      | HICKS        |
+|         95.72 |         132 | ESTHER      | CRAWFORD     |
+|         98.73 |         133 | PAULINE     | HENRY        |
+|         94.77 |         134 | EMMA        | BOYD         |
+|        110.70 |         135 | JUANITA     | MASON        |
+|         62.85 |         136 | ANITA       | MORALES      |
+|        194.61 |         137 | RHONDA      | KENNEDY      |
+|        110.66 |         138 | HAZEL       | WARREN       |
+|        113.73 |         139 | AMBER       | DIXON        |
+|         83.82 |         140 | EVA         | RAMOS        |
+|        130.68 |         141 | DEBBIE      | REYES        |
+|         94.74 |         142 | APRIL       | BURNS        |
+|         89.78 |         143 | LESLIE      | GORDON       |
+|        195.58 |         144 | CLARA       | SHAW         |
+|        108.72 |         145 | LUCILLE     | HOLMES       |
+|        139.71 |         146 | JAMIE       | RICE         |
+|        127.66 |         147 | JOANNE      | ROBERTSON    |
+|        216.54 |         148 | ELEANOR     | HUNT         |
+|        121.74 |         149 | VALERIE     | BLACK        |
+|        105.75 |         150 | DANIELLE    | DANIELS      |
+|         92.73 |         151 | MEGAN       | PALMER       |
+|         83.79 |         152 | ALICIA      | MILLS        |
+|         94.76 |         153 | SUZANNE     | NICHOLS      |
+|        130.70 |         154 | MICHELE     | GRANT        |
+|        109.75 |         155 | GAIL        | KNIGHT       |
+|        101.75 |         156 | BERTHA      | FERGUSON     |
+|        113.69 |         157 | DARLENE     | ROSE         |
+|        126.68 |         158 | VERONICA    | STONE        |
+|         68.79 |         159 | JILL        | HAWKINS      |
+|        106.73 |         160 | ERIN        | DUNN         |
+|        112.70 |         161 | GERALDINE   | PERKINS      |
+|         71.80 |         162 | LAUREN      | HUDSON       |
+|        122.71 |         163 | CATHY       | SPENCER      |
+|         66.84 |         164 | JOANN       | GARDNER      |
+|         86.79 |         165 | LORRAINE    | STEPHENS     |
+|        123.72 |         166 | LYNN        | PAYNE        |
+|        119.68 |         167 | SALLY       | PIERCE       |
+|        135.66 |         168 | REGINA      | BERRY        |
+|         95.78 |         169 | ERICA       | MATTHEWS     |
+|        119.74 |         170 | BEATRICE    | ARNOLD       |
+|        114.74 |         171 | DOLORES     | WAGNER       |
+|        145.67 |         172 | BERNICE     | WILLIS       |
+|        119.71 |         173 | AUDREY      | RAY          |
+|         92.79 |         174 | YVONNE      | WATKINS      |
+|         98.76 |         175 | ANNETTE     | OLSON        |
+|        173.63 |         176 | JUNE        | CARROLL      |
+|         71.77 |         177 | SAMANTHA    | DUNCAN       |
+|        194.61 |         178 | MARION      | SNYDER       |
+|        133.71 |         179 | DANA        | HART         |
+|         98.77 |         180 | STACY       | CUNNINGHAM   |
+|        174.66 |         181 | ANA         | BRADLEY      |
+|         97.74 |         182 | RENEE       | LANE         |
+|         76.77 |         183 | IDA         | ANDREWS      |
+|         90.77 |         184 | VIVIAN      | RUIZ         |
+|         84.77 |         185 | ROBERTA     | HARPER       |
+|        114.69 |         186 | HOLLY       | FOX          |
+|        159.72 |         187 | BRITTANY    | RILEY        |
+|         92.75 |         188 | MELANIE     | ARMSTRONG    |
+|         93.78 |         189 | LORETTA     | CARPENTER    |
+|        110.73 |         190 | YOLANDA     | WEAVER       |
+|         74.80 |         191 | JEANETTE    | GREENE       |
+|         99.77 |         192 | LAURIE      | LAWRENCE     |
+|        109.75 |         193 | KATIE       | ELLIOTT      |
+|         87.82 |         194 | KRISTEN     | CHAVEZ       |
+|         86.81 |         195 | VANESSA     | SIMS         |
+|        151.65 |         196 | ALMA        | AUSTIN       |
+|        154.60 |         197 | SUE         | PETERS       |
+|        141.63 |         198 | ELSIE       | KELLEY       |
+|        103.75 |         199 | BETH        | FRANKLIN     |
+|        136.73 |         200 | JEANNE      | LAWSON       |
+|        108.75 |         201 | VICKI       | FIELDS       |
+|        103.74 |         202 | CARLA       | GUTIERREZ    |
+|         88.80 |         203 | TARA        | RYAN         |
+|        147.65 |         204 | ROSEMARY    | SCHMIDT      |
+|         80.82 |         205 | EILEEN      | CARR         |
+|        126.73 |         206 | TERRI       | VASQUEZ      |
+|        137.66 |         207 | GERTRUDE    | CASTILLO     |
+|         91.74 |         208 | LUCY        | WHEELER      |
+|        161.68 |         209 | TONYA       | CHAPMAN      |
+|        137.69 |         210 | ELLA        | OLIVER       |
+|        151.66 |         211 | STACEY      | MONTGOMERY   |
+|         91.80 |         212 | WILMA       | RICHARDS     |
+|        111.72 |         213 | GINA        | WILLIAMSON   |
+|        116.69 |         214 | KRISTIN     | JOHNSTON     |
+|         91.74 |         215 | JESSIE      | BANKS        |
+|         95.77 |         216 | NATALIE     | MEYER        |
+|         98.77 |         217 | AGNES       | BISHOP       |
+|         67.82 |         218 | VERA        | MCCOY        |
+|        101.74 |         219 | WILLIE      | HOWELL       |
+|        114.73 |         220 | CHARLENE    | ALVAREZ      |
+|        132.72 |         221 | BESSIE      | MORRISON     |
+|         91.79 |         222 | DELORES     | HANSEN       |
+|         80.83 |         223 | MELINDA     | FERNANDEZ    |
+|         76.78 |         224 | PEARL       | GARZA        |
+|        120.74 |         225 | ARLENE      | HARVEY       |
+|         87.79 |         226 | MAUREEN     | LITTLE       |
+|         87.76 |         227 | COLLEEN     | BURTON       |
+|         92.73 |         228 | ALLISON     | STANLEY      |
+|         93.75 |         229 | TAMARA      | NGUYEN       |
+|        124.67 |         230 | JOY         | GEORGE       |
+|        110.74 |         231 | GEORGIA     | JACOBS       |
+|         95.75 |         232 | CONSTANCE   | REID         |
+|         89.77 |         233 | LILLIE      | KIM          |
+|        111.74 |         234 | CLAUDIA     | FULLER       |
+|         93.75 |         235 | JACKIE      | LYNCH        |
+|        175.58 |         236 | MARCIA      | DEAN         |
+|        144.67 |         237 | TANYA       | GILBERT      |
+|         94.79 |         238 | NELLIE      | GARRETT      |
+|        142.66 |         239 | MINNIE      | ROMERO       |
+|        117.74 |         240 | MARLENE     | WELCH        |
+|        122.66 |         241 | HEIDI       | LARSON       |
+|        140.68 |         242 | GLENDA      | FRAZIER      |
+|         82.76 |         243 | LYDIA       | BURKE        |
+|        129.68 |         244 | VIOLA       | HANSON       |
+|        132.68 |         245 | COURTNEY    | DAY          |
+|        107.77 |         246 | MARIAN      | MENDOZA      |
+|        104.78 |         247 | STELLA      | MORENO       |
+|         50.85 |         248 | CAROLINE    | BOWMAN       |
+|        107.77 |         249 | DORA        | MEDINA       |
+|         73.80 |         250 | JO          | FOWLER       |
+|        120.69 |         251 | VICKIE      | BREWER       |
+|         64.78 |         252 | MATTIE      | HOFFMAN      |
+|        127.71 |         253 | TERRY       | CARLSON      |
+|        116.68 |         254 | MAXINE      | SILVA        |
+|         70.82 |         255 | IRMA        | PEARSON      |
+|        112.70 |         256 | MABEL       | HOLLAND      |
+|        151.63 |         257 | MARSHA      | DOUGLAS      |
+|        110.76 |         258 | MYRTLE      | FLEMING      |
+|        168.68 |         259 | LENA        | JENSEN       |
+|        122.69 |         260 | CHRISTY     | VARGAS       |
+|        107.74 |         261 | DEANNA      | BYRD         |
+|        119.72 |         262 | PATSY       | DAVIDSON     |
+|        122.71 |         263 | HILDA       | HOPKINS      |
+|         98.75 |         264 | GWENDOLYN   | MAY          |
+|        133.71 |         265 | JENNIE      | TERRY        |
+|        118.72 |         266 | NORA        | HERRERA      |
+|        159.64 |         267 | MARGIE      | WADE         |
+|        123.71 |         268 | NINA        | SOTO         |
+|        129.70 |         269 | CASSANDRA   | WALTERS      |
+|        104.75 |         270 | LEAH        | CURTIS       |
+|         68.82 |         271 | PENNY       | NEAL         |
+|         98.80 |         272 | KAY         | CALDWELL     |
+|        157.65 |         273 | PRISCILLA   | LOWE         |
+|        152.65 |         274 | NAOMI       | JENNINGS     |
+|        108.70 |         275 | CAROLE      | BARNETT      |
+|        122.72 |         276 | BRANDY      | GRAVES       |
+|        144.68 |         277 | OLGA        | JIMENEZ      |
+|         88.74 |         278 | BILLIE      | HORTON       |
+|        135.69 |         279 | DIANNE      | SHELTON      |
+|        118.73 |         280 | TRACEY      | BARRETT      |
+|         50.86 |         281 | LEONA       | OBRIEN       |
+|        103.73 |         282 | JENNY       | CASTRO       |
+|         86.72 |         283 | FELICIA     | SUTTON       |
+|        126.72 |         284 | SONIA       | GREGORY      |
+|        135.74 |         285 | MIRIAM      | MCKINNEY     |
+|        117.73 |         286 | VELMA       | LUCAS        |
+|        115.71 |         287 | BECKY       | MILES        |
+|         80.76 |         288 | BOBBIE      | CRAIG        |
+|        142.70 |         289 | VIOLET      | RODRIQUEZ    |
+|        109.72 |         290 | KRISTINA    | CHAMBERS     |
+|         95.77 |         291 | TONI        | HOLT         |
+|        118.73 |         292 | MISTY       | LAMBERT      |
+|        158.69 |         293 | MAE         | FLETCHER     |
+|        113.74 |         294 | SHELLY      | WATTS        |
+|        162.62 |         295 | DAISY       | BATES        |
+|        129.70 |         296 | RAMONA      | HALE         |
+|        128.67 |         297 | SHERRI      | RHODES       |
+|        101.74 |         298 | ERIKA       | PENA         |
+|        131.70 |         299 | JAMES       | GANNON       |
+|        137.69 |         300 | JOHN        | FARNSWORTH   |
+|         92.79 |         301 | ROBERT      | BAUGHMAN     |
+|        127.71 |         302 | MICHAEL     | SILVERMAN    |
+|        100.74 |         303 | WILLIAM     | SATTERFIELD  |
+|        115.74 |         304 | DAVID       | ROYAL        |
+|        109.75 |         305 | RICHARD     | MCCRARY      |
+|        138.68 |         306 | CHARLES     | KOWALSKI     |
+|        134.70 |         307 | JOSEPH      | JOY          |
+|        105.75 |         308 | THOMAS      | GRIGSBY      |
+|        147.69 |         309 | CHRISTOPHER | GRECO        |
+|         97.80 |         310 | DANIEL      | CABRAL       |
+|        120.77 |         311 | PAUL        | TROUT        |
+|        104.74 |         312 | MARK        | RINEHART     |
+|         89.77 |         313 | DONALD      | MAHON        |
+|        131.67 |         314 | GEORGE      | LINTON       |
+|         84.83 |         315 | KENNETH     | GOODEN       |
+|        132.71 |         316 | STEVEN      | CURLEY       |
+|        114.72 |         317 | EDWARD      | BAUGH        |
+|         52.88 |         318 | BRIAN       | WYMAN        |
+|        132.70 |         319 | RONALD      | WEINER       |
+|         71.80 |         320 | ANTHONY     | SCHWAB       |
+|        116.78 |         321 | KEVIN       | SCHULER      |
+|        128.72 |         322 | JASON       | MORRISSEY    |
+|        114.69 |         323 | MATTHEW     | MAHAN        |
+|        103.75 |         324 | GARY        | COY          |
+|         91.78 |         325 | TIMOTHY     | BUNN         |
+|         96.75 |         326 | JOSE        | ANDREW       |
+|        112.74 |         327 | LARRY       | THRASHER     |
+|         90.77 |         328 | JEFFREY     | SPEAR        |
+|        127.68 |         329 | FRANK       | WAGGONER     |
+|         94.75 |         330 | SCOTT       | SHELLEY      |
+|        122.73 |         331 | ERIC        | ROBERT       |
+|        118.72 |         332 | STEPHEN     | QUALLS       |
+|        109.73 |         333 | ANDREW      | PURDY        |
+|        135.70 |         334 | RAYMOND     | MCWHORTER    |
+|         78.77 |         335 | GREGORY     | MAULDIN      |
+|        119.70 |         336 | JOSHUA      | MARK         |
+|        143.71 |         337 | JERRY       | JORDON       |
+|        114.72 |         338 | DENNIS      | GILMAN       |
+|        127.70 |         339 | WALTER      | PERRYMAN     |
+|        119.69 |         340 | PATRICK     | NEWSOM       |
+|        106.77 |         341 | PETER       | MENARD       |
+|        130.68 |         342 | HAROLD      | MARTINO      |
+|        114.75 |         343 | DOUGLAS     | GRAF         |
+|         73.82 |         344 | HENRY       | BILLINGSLEY  |
+|        106.77 |         345 | CARL        | ARTIS        |
+|        155.68 |         346 | ARTHUR      | SIMPKINS     |
+|        142.70 |         347 | RYAN        | SALISBURY    |
+|        146.64 |         348 | ROGER       | QUINTANILLA  |
+|        138.71 |         349 | JOE         | GILLILAND    |
+|         73.77 |         350 | JUAN        | FRALEY       |
+|         89.76 |         351 | JACK        | FOUST        |
+|         99.77 |         352 | ALBERT      | CROUSE       |
+|         72.82 |         353 | JONATHAN    | SCARBOROUGH  |
+|        129.64 |         354 | JUSTIN      | NGO          |
+|         72.80 |         355 | TERRY       | GRISSOM      |
+|        121.70 |         356 | GERALD      | FULTZ        |
+|         89.74 |         357 | KEITH       | RICO         |
+|         80.79 |         358 | SAMUEL      | MARLOW       |
+|        101.75 |         359 | WILLIE      | MARKHAM      |
+|        150.66 |         360 | RALPH       | MADRIGAL     |
+|        100.69 |         361 | LAWRENCE    | LAWTON       |
+|        145.68 |         362 | NICHOLAS    | BARFIELD     |
+|        143.71 |         363 | ROY         | WHITING      |
+|         95.77 |         364 | BENJAMIN    | VARNEY       |
+|        103.77 |         365 | BRUCE       | SCHWARZ      |
+|        152.63 |         366 | BRANDON     | HUEY         |
+|        101.78 |         367 | ADAM        | GOOCH        |
+|        157.65 |         368 | HARRY       | ARCE         |
+|         88.75 |         369 | FRED        | WHEAT        |
+|         70.81 |         370 | WAYNE       | TRUONG       |
+|        149.65 |         371 | BILLY       | POULIN       |
+|        158.66 |         372 | STEVE       | MACKENZIE    |
+|        161.65 |         373 | LOUIS       | LEONE        |
+|        103.72 |         374 | JEREMY      | HURTADO      |
+|        110.76 |         375 | AARON       | SELBY        |
+|        110.72 |         376 | RANDY       | GAITHER      |
+|         93.74 |         377 | HOWARD      | FORTNER      |
+|         71.81 |         378 | EUGENE      | CULPEPPER    |
+|        106.77 |         379 | CARLOS      | COUGHLIN     |
+|        136.64 |         380 | RUSSELL     | BRINSON      |
+|        106.65 |         381 | BOBBY       | BOUDREAU     |
+|         91.76 |         382 | VICTOR      | BARKLEY      |
+|        103.73 |         383 | MARTIN      | BALES        |
+|         89.75 |         384 | ERNEST      | STEPP        |
+|        101.74 |         385 | PHILLIP     | HOLM         |
+|        117.71 |         386 | TODD        | TAN          |
+|        101.74 |         387 | JESSE       | SCHILLING    |
+|        124.70 |         388 | CRAIG       | MORRELL      |
+|        124.74 |         389 | ALAN        | KAHN         |
+|        152.67 |         390 | SHAWN       | HEATON       |
+|        104.70 |         391 | CLARENCE    | GAMEZ        |
+|         91.77 |         392 | SEAN        | DOUGLASS     |
+|        121.69 |         393 | PHILIP      | CAUSEY       |
+|         84.78 |         394 | CHRIS       | BROTHERS     |
+|         57.81 |         395 | JOHNNY      | TURPIN       |
+|        111.73 |         396 | EARL        | SHANKS       |
+|        105.71 |         397 | JIMMY       | SCHRADER     |
+|         78.84 |         398 | ANTONIO     | MEEK         |
+|         91.79 |         399 | DANNY       | ISOM         |
+|        124.72 |         400 | BRYAN       | HARDISON     |
+|         73.79 |         401 | TONY        | CARRANZA     |
+|         79.80 |         402 | LUIS        | YANEZ        |
+|        166.65 |         403 | MIKE        | WAY          |
+|        139.70 |         404 | STANLEY     | SCROGGINS    |
+|        109.68 |         405 | LEONARD     | SCHOFIELD    |
+|        122.68 |         406 | NATHAN      | RUNYON       |
+|        112.73 |         407 | DALE        | RATCLIFF     |
+|        116.70 |         408 | MANUEL      | MURRELL      |
+|        104.77 |         409 | RODNEY      | MOELLER      |
+|        167.62 |         410 | CURTIS      | IRBY         |
+|         80.74 |         411 | NORMAN      | CURRIER      |
+|         85.79 |         412 | ALLEN       | BUTTERFIELD  |
+|         75.79 |         413 | MARVIN      | YEE          |
+|        105.75 |         414 | VINCENT     | RALSTON      |
+|         93.77 |         415 | GLENN       | PULLEN       |
+|        121.69 |         416 | JEFFERY     | PINSON       |
+|        110.75 |         417 | TRAVIS      | ESTEP        |
+|        107.70 |         418 | JEFF        | EAST         |
+|         89.75 |         419 | CHAD        | CARBONE      |
+|         79.79 |         420 | JACOB       | LANCE        |
+|        119.73 |         421 | LEE         | HAWKS        |
+|         97.74 |         422 | MELVIN      | ELLINGTON    |
+|        120.74 |         423 | ALFRED      | CASILLAS     |
+|        110.70 |         424 | KYLE        | SPURLOCK     |
+|        104.74 |         425 | FRANCIS     | SIKES        |
+|        126.73 |         426 | BRADLEY     | MOTLEY       |
+|        114.76 |         427 | JESUS       | MCCARTNEY    |
+|         78.80 |         428 | HERBERT     | KRUGER       |
+|        105.79 |         429 | FREDERICK   | ISBELL       |
+|         79.78 |         430 | RAY         | HOULE        |
+|         95.77 |         431 | JOEL        | FRANCISCO    |
+|        116.77 |         432 | EDWIN       | BURK         |
+|        133.75 |         433 | DON         | BONE         |
+|        128.73 |         434 | EDDIE       | TOMLIN       |
+|         91.75 |         435 | RICKY       | SHELBY       |
+|        144.70 |         436 | TROY        | QUIGLEY      |
+|         99.77 |         437 | RANDALL     | NEUMANN      |
+|        134.67 |         438 | BARRY       | LOVELACE     |
+|        151.64 |         439 | ALEXANDER   | FENNELL      |
+|         88.78 |         440 | BERNARD     | COLBY        |
+|        112.72 |         441 | MARIO       | CHEATHAM     |
+|        118.68 |         442 | LEROY       | BUSTAMANTE   |
+|         98.78 |         443 | FRANCISCO   | SKIDMORE     |
+|        115.70 |         444 | MARCUS      | HIDALGO      |
+|        102.74 |         445 | MICHEAL     | FORMAN       |
+|        116.69 |         446 | THEODORE    | CULP         |
+|        113.71 |         447 | CLIFFORD    | BOWENS       |
+|        135.71 |         448 | MIGUEL      | BETANCOURT   |
+|         99.80 |         449 | OSCAR       | AQUINO       |
+|         89.74 |         450 | JAY         | ROBB         |
+|        128.67 |         451 | JIM         | REA          |
+|        107.68 |         452 | TOM         | MILNER       |
+|        111.77 |         453 | CALVIN      | MARTEL       |
+|        151.67 |         454 | ALEX        | GRESHAM      |
+|         87.76 |         455 | JON         | WILES        |
+|        100.75 |         456 | RONNIE      | RICKETTS     |
+|        114.72 |         457 | BILL        | GAVIN        |
+|         66.81 |         458 | LLOYD       | DOWD         |
+|        186.62 |         459 | TOMMY       | COLLAZO      |
+|        109.75 |         460 | LEON        | BOSTIC       |
+|         97.72 |         461 | DEREK       | BLAKELY      |
+|        159.67 |         462 | WARREN      | SHERROD      |
+|         91.75 |         463 | DARRELL     | POWER        |
+|         73.84 |         464 | JEROME      | KENYON       |
+|         69.83 |         465 | FLOYD       | GANDY        |
+|        104.77 |         466 | LEO         | EBERT        |
+|        139.71 |         467 | ALVIN       | DELOACH      |
+|        175.61 |         468 | TIM         | CARY         |
+|        177.60 |         469 | WESLEY      | BULL         |
+|        160.68 |         470 | GORDON      | ALLARD       |
+|        109.73 |         471 | DEAN        | SAUER        |
+|        141.70 |         472 | GREG        | ROBINS       |
+|        134.66 |         473 | JORGE       | OLIVARES     |
+|        100.74 |         474 | DUSTIN      | GILLETTE     |
+|        103.76 |         475 | PEDRO       | CHESTNUT     |
+|         95.78 |         476 | DERRICK     | BOURQUE      |
+|        109.78 |         477 | DAN         | PAINE        |
+|         86.81 |         478 | LEWIS       | LYMAN        |
+|        146.69 |         479 | ZACHARY     | HITE         |
+|        101.78 |         480 | COREY       | HAUSER       |
+|        115.71 |         481 | HERMAN      | DEVORE       |
+|        138.71 |         482 | MAURICE     | CRAWLEY      |
+|         88.82 |         483 | VERNON      | CHAPA        |
+|        139.70 |         484 | ROBERTO     | VU           |
+|        115.71 |         485 | CLYDE       | TOBIAS       |
+|        113.74 |         486 | GLEN        | TALBERT      |
+|        119.74 |         487 | HECTOR      | POINDEXTER   |
+|         95.78 |         488 | SHANE       | MILLARD      |
+|         99.79 |         489 | RICARDO     | MEADOR       |
+|        117.76 |         490 | SAM         | MCDUFFIE     |
+|        124.73 |         491 | RICK        | MATTOX       |
+|         65.84 |         492 | LESTER      | KRAUS        |
+|        112.77 |         493 | BRENT       | HARKINS      |
+|        140.69 |         494 | RAMON       | CHOATE       |
+|        120.74 |         495 | CHARLIE     | BESS         |
+|         88.79 |         496 | TYLER       | WREN         |
+|        129.72 |         497 | GILBERT     | SLEDGE       |
+|         97.73 |         498 | GENE        | SANBORN      |
+|        123.70 |         499 | MARC        | OUTLAW       |
+|        115.72 |         500 | REGINALD    | KINDER       |
+|         89.79 |         501 | RUBEN       | GEARY        |
+|        138.66 |         502 | BRETT       | CORNWELL     |
+|        115.68 |         503 | ANGEL       | BARCLAY      |
+|        133.72 |         504 | NATHANIEL   | ADAM         |
+|         97.79 |         505 | RAFAEL      | ABNEY        |
+|        152.65 |         506 | LESLIE      | SEWARD       |
+|         95.75 |         507 | EDGAR       | RHOADS       |
+|        127.75 |         508 | MILTON      | HOWLAND      |
+|        100.80 |         509 | RAUL        | FORTIER      |
+|        122.74 |         510 | BEN         | EASTER       |
+|         99.76 |         511 | CHESTER     | BENNER       |
+|        115.74 |         512 | CECIL       | VINES        |
+|        148.69 |         513 | DUANE       | TUBBS        |
+|         74.78 |         514 | FRANKLIN    | TROUTMAN     |
+|        126.72 |         515 | ANDRE       | RAPP         |
+|         98.74 |         516 | ELMER       | NOE          |
+|        105.75 |         517 | BRAD        | MCCURDY      |
+|        111.74 |         518 | GABRIEL     | HARDER       |
+|        103.77 |         519 | RON         | DELUCA       |
+|        134.68 |         520 | MITCHELL    | WESTMORELAND |
+|         80.77 |         521 | ROLAND      | SOUTH        |
+|        167.67 |         522 | ARNOLD      | HAVENS       |
+|         93.78 |         523 | HARVEY      | GUAJARDO     |
+|         87.81 |         524 | JARED       | ELY          |
+|         74.81 |         525 | ADRIAN      | CLARY        |
+|        221.55 |         526 | KARL        | SEAL         |
+|         81.76 |         527 | CORY        | MEEHAN       |
+|        111.75 |         528 | CLAUDE      | HERZOG       |
+|        118.71 |         529 | ERIK        | GUILLEN      |
+|         76.77 |         530 | DARRYL      | ASHCRAFT     |
+|        118.75 |         531 | JAMIE       | WAUGH        |
+|        152.68 |         532 | NEIL        | RENNER       |
+|        141.67 |         533 | JESSIE      | MILAM        |
+|         88.76 |         534 | CHRISTIAN   | JUNG         |
+|        135.68 |         535 | JAVIER      | ELROD        |
+|        117.75 |         536 | FERNANDO    | CHURCHILL    |
+|        103.75 |         537 | CLINTON     | BUFORD       |
+|        117.71 |         538 | TED         | BREAUX       |
+|         90.78 |         539 | MATHEW      | BOLIN        |
+|        112.76 |         540 | TYRONE      | ASHER        |
+|        108.76 |         541 | DARREN      | WINDHAM      |
+|         94.82 |         542 | LONNIE      | TIRADO       |
+|         82.78 |         543 | LANCE       | PEMBERTON    |
+|         98.78 |         544 | CODY        | NOLEN        |
+|         89.79 |         545 | JULIO       | NOLAND       |
+|        103.75 |         546 | KELLY       | KNOTT        |
+|         99.77 |         547 | KURT        | EMMONS       |
+|         79.81 |         548 | ALLAN       | CORNISH      |
+|         77.80 |         549 | NELSON      | CHRISTENSON  |
+|        159.68 |         550 | GUY         | BROWNLEE     |
+|         96.74 |         551 | CLAYTON     | BARBEE       |
+|         90.79 |         552 | HUGH        | WALDROP      |
+|        107.76 |         553 | MAX         | PITT         |
+|        101.78 |         554 | DWAYNE      | OLVERA       |
+|         74.83 |         555 | DWIGHT      | LOMBARDI     |
+|         83.79 |         556 | ARMANDO     | GRUBER       |
+|         73.76 |         557 | FELIX       | GAFFNEY      |
+|        135.72 |         558 | JIMMIE      | EGGLESTON    |
+|        110.72 |         559 | EVERETT     | BANDA        |
+|        132.70 |         560 | JORDAN      | ARCHULETA    |
+|         96.73 |         561 | IAN         | STILL        |
+|        109.75 |         562 | WALLACE     | SLONE        |
+|        110.71 |         563 | KEN         | PREWITT      |
+|         91.76 |         564 | BOB         | PFEIFFER     |
+|        126.71 |         565 | JAIME       | NETTLES      |
+|        141.66 |         566 | CASEY       | MENA         |
+|         85.80 |         567 | ALFREDO     | MCADAMS      |
+|         66.79 |         568 | ALBERTO     | HENNING      |
+|        134.68 |         569 | DAVE        | GARDINER     |
+|         99.74 |         570 | IVAN        | CROMWELL     |
+|        121.76 |         571 | JOHNNIE     | CHISHOLM     |
+|        108.75 |         572 | SIDNEY      | BURLESON     |
+|        120.71 |         573 | BYRON       | BOX          |
+|        109.72 |         574 | JULIAN      | VEST         |
+|        126.71 |         575 | ISAAC       | OGLESBY      |
+|        139.66 |         576 | MORRIS      | MCCARTER     |
+|        117.73 |         577 | CLIFTON     | MALCOLM      |
+|         96.78 |         578 | WILLARD     | LUMPKIN      |
+|        111.73 |         579 | DARYL       | LARUE        |
+|         99.73 |         580 | ROSS        | GREY         |
+|        107.73 |         581 | VIRGIL      | WOFFORD      |
+|        113.75 |         582 | ANDY        | VANHORN      |
+|        117.77 |         583 | MARSHALL    | THORN        |
+|        129.70 |         584 | SALVADOR    | TEEL         |
+|        117.76 |         585 | PERRY       | SWAFFORD     |
+|         64.81 |         586 | KIRK        | STCLAIR      |
+|        108.74 |         587 | SERGIO      | STANFIELD    |
+|        115.71 |         588 | MARION      | OCAMPO       |
+|        129.72 |         589 | TRACY       | HERRMANN     |
+|        112.75 |         590 | SETH        | HANNON       |
+|        134.73 |         591 | KENT        | ARSENAULT    |
+|        111.71 |         592 | TERRANCE    | ROUSH        |
+|        113.74 |         593 | RENE        | MCALISTER    |
+|        130.73 |         594 | EDUARDO     | HIATT        |
+|        117.70 |         595 | TERRENCE    | GUNDERSON    |
+|         96.72 |         596 | ENRIQUE     | FORSYTHE     |
+|         99.75 |         597 | FREDDIE     | DUGGAN       |
+|         83.78 |         598 | WADE        | DELVALLE     |
+|         83.81 |         599 | AUSTIN      | CINTRON      |
++---------------+-------------+-------------+--------------+
+599 rows in set (0.0336 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select sum(a.amount), a.customer_id, b.first_name, b.last_name from payment a inner join customer b on a.customer_id = b.customer_id group by a.customer_id order by sum(a.amount) desc limit 1;
++---------------+-------------+------------+-----------+
+| sum(a.amount) | customer_id | first_name | last_name |
++---------------+-------------+------------+-----------+
+|        221.55 |         526 | KARL       | SEAL      |
++---------------+-------------+------------+-----------+
+1 row in set (0.0445 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select sum(a.amount), a.customer_id, b.first_name, b.last_name from payment a inner join customer b on a.customer_id = b.customer_id group by a.customer_id order by sum(a.amount) asc limit 1;
++---------------+-------------+------------+-----------+
+| sum(a.amount) | customer_id | first_name | last_name |
++---------------+-------------+------------+-----------+
+|         50.85 |         248 | CAROLINE   | BOWMAN    |
++---------------+-------------+------------+-----------+
+1 row in set (0.0281 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > select sum(a.amount), a.customer_id, b.first_name, b.last_name from payment a inner join customer b on a.customer_id = b.customer_id group by a.customer_id order by sum(a.amount) desc limit 10;
++---------------+-------------+------------+-----------+
+| sum(a.amount) | customer_id | first_name | last_name |
++---------------+-------------+------------+-----------+
+|        221.55 |         526 | KARL       | SEAL      |
+|        216.54 |         148 | ELEANOR    | HUNT      |
+|        195.58 |         144 | CLARA      | SHAW      |
+|        194.61 |         137 | RHONDA     | KENNEDY   |
+|        194.61 |         178 | MARION     | SNYDER    |
+|        186.62 |         459 | TOMMY      | COLLAZO   |
+|        177.60 |         469 | WESLEY     | BULL      |
+|        175.61 |         468 | TIM        | CARY      |
+|        175.58 |         236 | MARCIA     | DEAN      |
+|        174.66 |         181 | ANA        | BRADLEY   |
++---------------+-------------+------------+-----------+
+10 rows in set (0.0273 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > use world;
+Default schema set to `world`.
+Fetching global names, object names from `world` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  world  SQL > desc city;
++-------------+----------+------+-----+---------+----------------+
+| Field       | Type     | Null | Key | Default | Extra          |
++-------------+----------+------+-----+---------+----------------+
+| ID          | int      | NO   | PRI | NULL    | auto_increment |
+| Name        | char(35) | NO   |     |         |                |
+| CountryCode | char(3)  | NO   | MUL |         |                |
+| District    | char(20) | NO   |     |         |                |
+| Population  | int      | NO   |     | 0       |                |
++-------------+----------+------+-----+---------+----------------+
+5 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select count(name) from city;
++-------------+
+| count(name) |
++-------------+
+|        4079 |
++-------------+
+1 row in set (0.0114 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select count(name) from city where name = 'mexico';
++-------------+
+| count(name) |
++-------------+
+|           1 |
++-------------+
+1 row in set (0.0029 sec)
+ MySQL  localhost:3306 ssl  world  SQL > desc country;
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type                                                                                  | Null | Key | Default | Extra |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)                                                                               | NO   | PRI |         |       |
+| Name           | char(52)                                                                              | NO   |     |         |       |
+| Continent      | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') | NO   |     | Asia    |       |
+| Region         | char(26)                                                                              | NO   |     |         |       |
+| SurfaceArea    | decimal(10,2)                                                                         | NO   |     | 0.00    |       |
+| IndepYear      | smallint                                                                              | YES  |     | NULL    |       |
+| Population     | int                                                                                   | NO   |     | 0       |       |
+| LifeExpectancy | decimal(3,1)                                                                          | YES  |     | NULL    |       |
+| GNP            | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| GNPOld         | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| LocalName      | char(45)                                                                              | NO   |     |         |       |
+| GovernmentForm | char(45)                                                                              | NO   |     |         |       |
+| HeadOfState    | char(60)                                                                              | YES  |     | NULL    |       |
+| Capital        | int                                                                                   | YES  |     | NULL    |       |
+| Code2          | char(2)                                                                               | NO   |     |         |       |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select count(*) from city;
++----------+
+| count(*) |
++----------+
+|     4079 |
++----------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, b.count(*) from country a inner join city b on a.code = b.countrycode
+                                      -> group by a.code;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from country a inner join city b on a.code = b.countrycode
+group by a.code' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > select count(*) from city group by countrycode;
++----------+
+| count(*) |
++----------+
+|        1 |
+|        4 |
+|        5 |
+|        2 |
+|        1 |
+|        1 |
+|        1 |
+|        5 |
+|       57 |
+|        3 |
+|        2 |
+|        1 |
+|       14 |
+|        6 |
+|        4 |
+|        1 |
+|        9 |
+|        4 |
+|        3 |
+|       24 |
+|       10 |
+|        1 |
+|        1 |
+|        3 |
+|       16 |
+|        2 |
+|        2 |
+|        8 |
+|      250 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|        1 |
+|       49 |
+|        2 |
+|        5 |
+|       29 |
+|      363 |
+|        5 |
+|        7 |
+|       18 |
+|        2 |
+|        1 |
+|       38 |
+|        1 |
+|        1 |
+|        1 |
+|       14 |
+|        1 |
+|        1 |
+|        2 |
+|       10 |
+|       93 |
+|        1 |
+|        1 |
+|        5 |
+|        6 |
+|       18 |
+|       15 |
+|       37 |
+|        1 |
+|        1 |
+|       59 |
+|        2 |
+|        7 |
+|        7 |
+|        1 |
+|        1 |
+|       40 |
+|        1 |
+|        2 |
+|        1 |
+|       81 |
+|        5 |
+|        5 |
+|        1 |
+|        1 |
+|        2 |
+|        2 |
+|        1 |
+|        1 |
+|        8 |
+|        1 |
+|        1 |
+|        4 |
+|        1 |
+|        2 |
+|        1 |
+|        2 |
+|        3 |
+|        4 |
+|        4 |
+|        9 |
+|       85 |
+|      341 |
+|        2 |
+|       67 |
+|       15 |
+|        1 |
+|       14 |
+|       58 |
+|        3 |
+|        5 |
+|      248 |
+|       21 |
+|        8 |
+|        2 |
+|        3 |
+|        2 |
+|        1 |
+|       70 |
+|        3 |
+|        2 |
+|        2 |
+|        1 |
+|        4 |
+|        1 |
+|        2 |
+|        7 |
+|        1 |
+|        5 |
+|        1 |
+|        3 |
+|        1 |
+|       22 |
+|        2 |
+|        4 |
+|        5 |
+|        1 |
+|      173 |
+|        1 |
+|        1 |
+|        1 |
+|        2 |
+|       16 |
+|        1 |
+|        1 |
+|       12 |
+|        2 |
+|        1 |
+|        1 |
+|        3 |
+|        2 |
+|       18 |
+|        1 |
+|        1 |
+|        1 |
+|        3 |
+|        1 |
+|       64 |
+|        4 |
+|        1 |
+|       28 |
+|        5 |
+|        5 |
+|        2 |
+|        9 |
+|        5 |
+|       59 |
+|        2 |
+|        1 |
+|       22 |
+|      136 |
+|        1 |
+|        1 |
+|       44 |
+|        9 |
+|       13 |
+|        5 |
+|        5 |
+|        6 |
+|        2 |
+|        1 |
+|        1 |
+|       29 |
+|      189 |
+|        1 |
+|       24 |
+|       12 |
+|        9 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        1 |
+|        7 |
+|        2 |
+|        3 |
+|        1 |
+|        1 |
+|        1 |
+|        3 |
+|        2 |
+|       15 |
+|        1 |
+|        1 |
+|       11 |
+|        1 |
+|        2 |
+|        1 |
+|       12 |
+|        2 |
+|        1 |
+|        4 |
+|        1 |
+|        1 |
+|        2 |
+|        8 |
+|       62 |
+|        1 |
+|       42 |
+|       10 |
+|        1 |
+|       57 |
+|        1 |
+|      274 |
+|       17 |
+|        1 |
+|        1 |
+|       41 |
+|        1 |
+|        1 |
+|       22 |
+|        1 |
+|        1 |
+|        1 |
+|        6 |
+|        8 |
+|       44 |
+|        7 |
+|        6 |
++----------+
+232 rows in set (0.0015 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select b.name, a.count(*) from country b inner join city a on b.code = a.countrycode
+                                      -> group by b.code;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from country b inner join city a on b.code = a.countrycode
+group by b.code' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > select b.name, a.count(*) from country b inner join city a on b.code = a.countrycode group by a.countrycode;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from country b inner join city a on b.code = a.countrycode group by a.country' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > select b.name, a.count(*) from city a inner join country b on b.code = a.countrycode group by a.countrycode;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from city a inner join country b on b.code = a.countrycode group by a.country' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > desc country;
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field          | Type                                                                                  | Null | Key | Default | Extra |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Code           | char(3)                                                                               | NO   | PRI |         |       |
+| Name           | char(52)                                                                              | NO   |     |         |       |
+| Continent      | enum('Asia','Europe','North America','Africa','Oceania','Antarctica','South America') | NO   |     | Asia    |       |
+| Region         | char(26)                                                                              | NO   |     |         |       |
+| SurfaceArea    | decimal(10,2)                                                                         | NO   |     | 0.00    |       |
+| IndepYear      | smallint                                                                              | YES  |     | NULL    |       |
+| Population     | int                                                                                   | NO   |     | 0       |       |
+| LifeExpectancy | decimal(3,1)                                                                          | YES  |     | NULL    |       |
+| GNP            | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| GNPOld         | decimal(10,2)                                                                         | YES  |     | NULL    |       |
+| LocalName      | char(45)                                                                              | NO   |     |         |       |
+| GovernmentForm | char(45)                                                                              | NO   |     |         |       |
+| HeadOfState    | char(60)                                                                              | YES  |     | NULL    |       |
+| Capital        | int                                                                                   | YES  |     | NULL    |       |
+| Code2          | char(2)                                                                               | NO   |     |         |       |
++----------------+---------------------------------------------------------------------------------------+------+-----+---------+-------+
+15 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select count(*), name from city group by countrycode;
+ERROR: 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'world.city.Name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+ MySQL  localhost:3306 ssl  world  SQL > select count(*), countrycode from city group by countrycode;
++----------+-------------+
+| count(*) | countrycode |
++----------+-------------+
+|        1 | ABW         |
+|        4 | AFG         |
+|        5 | AGO         |
+|        2 | AIA         |
+|        1 | ALB         |
+|        1 | AND         |
+|        1 | ANT         |
+|        5 | ARE         |
+|       57 | ARG         |
+|        3 | ARM         |
+|        2 | ASM         |
+|        1 | ATG         |
+|       14 | AUS         |
+|        6 | AUT         |
+|        4 | AZE         |
+|        1 | BDI         |
+|        9 | BEL         |
+|        4 | BEN         |
+|        3 | BFA         |
+|       24 | BGD         |
+|       10 | BGR         |
+|        1 | BHR         |
+|        1 | BHS         |
+|        3 | BIH         |
+|       16 | BLR         |
+|        2 | BLZ         |
+|        2 | BMU         |
+|        8 | BOL         |
+|      250 | BRA         |
+|        1 | BRB         |
+|        1 | BRN         |
+|        1 | BTN         |
+|        2 | BWA         |
+|        1 | CAF         |
+|       49 | CAN         |
+|        2 | CCK         |
+|        5 | CHE         |
+|       29 | CHL         |
+|      363 | CHN         |
+|        5 | CIV         |
+|        7 | CMR         |
+|       18 | COD         |
+|        2 | COG         |
+|        1 | COK         |
+|       38 | COL         |
+|        1 | COM         |
+|        1 | CPV         |
+|        1 | CRI         |
+|       14 | CUB         |
+|        1 | CXR         |
+|        1 | CYM         |
+|        2 | CYP         |
+|       10 | CZE         |
+|       93 | DEU         |
+|        1 | DJI         |
+|        1 | DMA         |
+|        5 | DNK         |
+|        6 | DOM         |
+|       18 | DZA         |
+|       15 | ECU         |
+|       37 | EGY         |
+|        1 | ERI         |
+|        1 | ESH         |
+|       59 | ESP         |
+|        2 | EST         |
+|        7 | ETH         |
+|        7 | FIN         |
+|        1 | FJI         |
+|        1 | FLK         |
+|       40 | FRA         |
+|        1 | FRO         |
+|        2 | FSM         |
+|        1 | GAB         |
+|       81 | GBR         |
+|        5 | GEO         |
+|        5 | GHA         |
+|        1 | GIB         |
+|        1 | GIN         |
+|        2 | GLP         |
+|        2 | GMB         |
+|        1 | GNB         |
+|        1 | GNQ         |
+|        8 | GRC         |
+|        1 | GRD         |
+|        1 | GRL         |
+|        4 | GTM         |
+|        1 | GUF         |
+|        2 | GUM         |
+|        1 | GUY         |
+|        2 | HKG         |
+|        3 | HND         |
+|        4 | HRV         |
+|        4 | HTI         |
+|        9 | HUN         |
+|       85 | IDN         |
+|      341 | IND         |
+|        2 | IRL         |
+|       67 | IRN         |
+|       15 | IRQ         |
+|        1 | ISL         |
+|       14 | ISR         |
+|       58 | ITA         |
+|        3 | JAM         |
+|        5 | JOR         |
+|      248 | JPN         |
+|       21 | KAZ         |
+|        8 | KEN         |
+|        2 | KGZ         |
+|        3 | KHM         |
+|        2 | KIR         |
+|        1 | KNA         |
+|       70 | KOR         |
+|        3 | KWT         |
+|        2 | LAO         |
+|        2 | LBN         |
+|        1 | LBR         |
+|        4 | LBY         |
+|        1 | LCA         |
+|        2 | LIE         |
+|        7 | LKA         |
+|        1 | LSO         |
+|        5 | LTU         |
+|        1 | LUX         |
+|        3 | LVA         |
+|        1 | MAC         |
+|       22 | MAR         |
+|        2 | MCO         |
+|        4 | MDA         |
+|        5 | MDG         |
+|        1 | MDV         |
+|      173 | MEX         |
+|        1 | MHL         |
+|        1 | MKD         |
+|        1 | MLI         |
+|        2 | MLT         |
+|       16 | MMR         |
+|        1 | MNG         |
+|        1 | MNP         |
+|       12 | MOZ         |
+|        2 | MRT         |
+|        1 | MSR         |
+|        1 | MTQ         |
+|        3 | MUS         |
+|        2 | MWI         |
+|       18 | MYS         |
+|        1 | MYT         |
+|        1 | NAM         |
+|        1 | NCL         |
+|        3 | NER         |
+|        1 | NFK         |
+|       64 | NGA         |
+|        4 | NIC         |
+|        1 | NIU         |
+|       28 | NLD         |
+|        5 | NOR         |
+|        5 | NPL         |
+|        2 | NRU         |
+|        9 | NZL         |
+|        5 | OMN         |
+|       59 | PAK         |
+|        2 | PAN         |
+|        1 | PCN         |
+|       22 | PER         |
+|      136 | PHL         |
+|        1 | PLW         |
+|        1 | PNG         |
+|       44 | POL         |
+|        9 | PRI         |
+|       13 | PRK         |
+|        5 | PRT         |
+|        5 | PRY         |
+|        6 | PSE         |
+|        2 | PYF         |
+|        1 | QAT         |
+|        1 | REU         |
+|       29 | ROM         |
+|      189 | RUS         |
+|        1 | RWA         |
+|       24 | SAU         |
+|       12 | SDN         |
+|        9 | SEN         |
+|        1 | SGP         |
+|        1 | SHN         |
+|        1 | SJM         |
+|        1 | SLB         |
+|        1 | SLE         |
+|        7 | SLV         |
+|        2 | SMR         |
+|        3 | SOM         |
+|        1 | SPM         |
+|        1 | STP         |
+|        1 | SUR         |
+|        3 | SVK         |
+|        2 | SVN         |
+|       15 | SWE         |
+|        1 | SWZ         |
+|        1 | SYC         |
+|       11 | SYR         |
+|        1 | TCA         |
+|        2 | TCD         |
+|        1 | TGO         |
+|       12 | THA         |
+|        2 | TJK         |
+|        1 | TKL         |
+|        4 | TKM         |
+|        1 | TMP         |
+|        1 | TON         |
+|        2 | TTO         |
+|        8 | TUN         |
+|       62 | TUR         |
+|        1 | TUV         |
+|       42 | TWN         |
+|       10 | TZA         |
+|        1 | UGA         |
+|       57 | UKR         |
+|        1 | URY         |
+|      274 | USA         |
+|       17 | UZB         |
+|        1 | VAT         |
+|        1 | VCT         |
+|       41 | VEN         |
+|        1 | VGB         |
+|        1 | VIR         |
+|       22 | VNM         |
+|        1 | VUT         |
+|        1 | WLF         |
+|        1 | WSM         |
+|        6 | YEM         |
+|        8 | YUG         |
+|       44 | ZAF         |
+|        7 | ZMB         |
+|        6 | ZWE         |
++----------+-------------+
+232 rows in set (0.0016 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.count(*), a.countrycode, b.name from city a inner join country b on a.code = b.countrycode group by countrycode;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*), a.countrycode, b.name from city a inner join country b on a.code = b.country' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > select a.count(*), a.countrycode, b.name from city a inner join country b on a.code = b.countrycode group by a.countrycode;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*), a.countrycode, b.name from city a inner join country b on a.code = b.country' at line 1
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, count(*) as total from city
+                                      -> ^C
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, count(*) as total from country a
+                                      -> inner join city b
+                                      -> on a.code = b.countrycode group by total;
+ERROR: 1056 (42000): Can't group on 'total'
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, count(*) as total from country a inner join city b on a.code = b.countrycode group by a.code;
++---------------------------------------+-------+
+| name                                  | total |
++---------------------------------------+-------+
+| Aruba                                 |     1 |
+| Afghanistan                           |     4 |
+| Angola                                |     5 |
+| Anguilla                              |     2 |
+| Albania                               |     1 |
+| Andorra                               |     1 |
+| Netherlands Antilles                  |     1 |
+| United Arab Emirates                  |     5 |
+| Argentina                             |    57 |
+| Armenia                               |     3 |
+| American Samoa                        |     2 |
+| Antigua and Barbuda                   |     1 |
+| Australia                             |    14 |
+| Austria                               |     6 |
+| Azerbaijan                            |     4 |
+| Burundi                               |     1 |
+| Belgium                               |     9 |
+| Benin                                 |     4 |
+| Burkina Faso                          |     3 |
+| Bangladesh                            |    24 |
+| Bulgaria                              |    10 |
+| Bahrain                               |     1 |
+| Bahamas                               |     1 |
+| Bosnia and Herzegovina                |     3 |
+| Belarus                               |    16 |
+| Belize                                |     2 |
+| Bermuda                               |     2 |
+| Bolivia                               |     8 |
+| Brazil                                |   250 |
+| Barbados                              |     1 |
+| Brunei                                |     1 |
+| Bhutan                                |     1 |
+| Botswana                              |     2 |
+| Central African Republic              |     1 |
+| Canada                                |    49 |
+| Cocos (Keeling) Islands               |     2 |
+| Switzerland                           |     5 |
+| Chile                                 |    29 |
+| China                                 |   363 |
+| Côte d’Ivoire                         |     5 |
+| Cameroon                              |     7 |
+| Congo, The Democratic Republic of the |    18 |
+| Congo                                 |     2 |
+| Cook Islands                          |     1 |
+| Colombia                              |    38 |
+| Comoros                               |     1 |
+| Cape Verde                            |     1 |
+| Costa Rica                            |     1 |
+| Cuba                                  |    14 |
+| Christmas Island                      |     1 |
+| Cayman Islands                        |     1 |
+| Cyprus                                |     2 |
+| Czech Republic                        |    10 |
+| Germany                               |    93 |
+| Djibouti                              |     1 |
+| Dominica                              |     1 |
+| Denmark                               |     5 |
+| Dominican Republic                    |     6 |
+| Algeria                               |    18 |
+| Ecuador                               |    15 |
+| Egypt                                 |    37 |
+| Eritrea                               |     1 |
+| Western Sahara                        |     1 |
+| Spain                                 |    59 |
+| Estonia                               |     2 |
+| Ethiopia                              |     7 |
+| Finland                               |     7 |
+| Fiji Islands                          |     1 |
+| Falkland Islands                      |     1 |
+| France                                |    40 |
+| Faroe Islands                         |     1 |
+| Micronesia, Federated States of       |     2 |
+| Gabon                                 |     1 |
+| United Kingdom                        |    81 |
+| Georgia                               |     5 |
+| Ghana                                 |     5 |
+| Gibraltar                             |     1 |
+| Guinea                                |     1 |
+| Guadeloupe                            |     2 |
+| Gambia                                |     2 |
+| Guinea-Bissau                         |     1 |
+| Equatorial Guinea                     |     1 |
+| Greece                                |     8 |
+| Grenada                               |     1 |
+| Greenland                             |     1 |
+| Guatemala                             |     4 |
+| French Guiana                         |     1 |
+| Guam                                  |     2 |
+| Guyana                                |     1 |
+| Hong Kong                             |     2 |
+| Honduras                              |     3 |
+| Croatia                               |     4 |
+| Haiti                                 |     4 |
+| Hungary                               |     9 |
+| Indonesia                             |    85 |
+| India                                 |   341 |
+| Ireland                               |     2 |
+| Iran                                  |    67 |
+| Iraq                                  |    15 |
+| Iceland                               |     1 |
+| Israel                                |    14 |
+| Italy                                 |    58 |
+| Jamaica                               |     3 |
+| Jordan                                |     5 |
+| Japan                                 |   248 |
+| Kazakstan                             |    21 |
+| Kenya                                 |     8 |
+| Kyrgyzstan                            |     2 |
+| Cambodia                              |     3 |
+| Kiribati                              |     2 |
+| Saint Kitts and Nevis                 |     1 |
+| South Korea                           |    70 |
+| Kuwait                                |     3 |
+| Laos                                  |     2 |
+| Lebanon                               |     2 |
+| Liberia                               |     1 |
+| Libyan Arab Jamahiriya                |     4 |
+| Saint Lucia                           |     1 |
+| Liechtenstein                         |     2 |
+| Sri Lanka                             |     7 |
+| Lesotho                               |     1 |
+| Lithuania                             |     5 |
+| Luxembourg                            |     1 |
+| Latvia                                |     3 |
+| Macao                                 |     1 |
+| Morocco                               |    22 |
+| Monaco                                |     2 |
+| Moldova                               |     4 |
+| Madagascar                            |     5 |
+| Maldives                              |     1 |
+| Mexico                                |   173 |
+| Marshall Islands                      |     1 |
+| Macedonia                             |     1 |
+| Mali                                  |     1 |
+| Malta                                 |     2 |
+| Myanmar                               |    16 |
+| Mongolia                              |     1 |
+| Northern Mariana Islands              |     1 |
+| Mozambique                            |    12 |
+| Mauritania                            |     2 |
+| Montserrat                            |     1 |
+| Martinique                            |     1 |
+| Mauritius                             |     3 |
+| Malawi                                |     2 |
+| Malaysia                              |    18 |
+| Mayotte                               |     1 |
+| Namibia                               |     1 |
+| New Caledonia                         |     1 |
+| Niger                                 |     3 |
+| Norfolk Island                        |     1 |
+| Nigeria                               |    64 |
+| Nicaragua                             |     4 |
+| Niue                                  |     1 |
+| Netherlands                           |    28 |
+| Norway                                |     5 |
+| Nepal                                 |     5 |
+| Nauru                                 |     2 |
+| New Zealand                           |     9 |
+| Oman                                  |     5 |
+| Pakistan                              |    59 |
+| Panama                                |     2 |
+| Pitcairn                              |     1 |
+| Peru                                  |    22 |
+| Philippines                           |   136 |
+| Palau                                 |     1 |
+| Papua New Guinea                      |     1 |
+| Poland                                |    44 |
+| Puerto Rico                           |     9 |
+| North Korea                           |    13 |
+| Portugal                              |     5 |
+| Paraguay                              |     5 |
+| Palestine                             |     6 |
+| French Polynesia                      |     2 |
+| Qatar                                 |     1 |
+| Réunion                               |     1 |
+| Romania                               |    29 |
+| Russian Federation                    |   189 |
+| Rwanda                                |     1 |
+| Saudi Arabia                          |    24 |
+| Sudan                                 |    12 |
+| Senegal                               |     9 |
+| Singapore                             |     1 |
+| Saint Helena                          |     1 |
+| Svalbard and Jan Mayen                |     1 |
+| Solomon Islands                       |     1 |
+| Sierra Leone                          |     1 |
+| El Salvador                           |     7 |
+| San Marino                            |     2 |
+| Somalia                               |     3 |
+| Saint Pierre and Miquelon             |     1 |
+| Sao Tome and Principe                 |     1 |
+| Suriname                              |     1 |
+| Slovakia                              |     3 |
+| Slovenia                              |     2 |
+| Sweden                                |    15 |
+| Swaziland                             |     1 |
+| Seychelles                            |     1 |
+| Syria                                 |    11 |
+| Turks and Caicos Islands              |     1 |
+| Chad                                  |     2 |
+| Togo                                  |     1 |
+| Thailand                              |    12 |
+| Tajikistan                            |     2 |
+| Tokelau                               |     1 |
+| Turkmenistan                          |     4 |
+| East Timor                            |     1 |
+| Tonga                                 |     1 |
+| Trinidad and Tobago                   |     2 |
+| Tunisia                               |     8 |
+| Turkey                                |    62 |
+| Tuvalu                                |     1 |
+| Taiwan                                |    42 |
+| Tanzania                              |    10 |
+| Uganda                                |     1 |
+| Ukraine                               |    57 |
+| Uruguay                               |     1 |
+| United States                         |   274 |
+| Uzbekistan                            |    17 |
+| Holy See (Vatican City State)         |     1 |
+| Saint Vincent and the Grenadines      |     1 |
+| Venezuela                             |    41 |
+| Virgin Islands, British               |     1 |
+| Virgin Islands, U.S.                  |     1 |
+| Vietnam                               |    22 |
+| Vanuatu                               |     1 |
+| Wallis and Futuna                     |     1 |
+| Samoa                                 |     1 |
+| Yemen                                 |     6 |
+| Yugoslavia                            |     8 |
+| South Africa                          |    44 |
+| Zambia                                |     7 |
+| Zimbabwe                              |     6 |
++---------------------------------------+-------+
+232 rows in set (0.0030 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, count(*) as total from country a inner join city b on a.code = b.countrycode group by a.code
+                                      -> order by total asc limit 1;
++-------+-------+
+| name  | total |
++-------+-------+
+| Aruba |     1 |
++-------+-------+
+1 row in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  world  SQL > select a.name, count(*) as total from country a inner join city b on a.code = b.countrycode group by a.code order by total desc limit 1;
++-------+-------+
+| name  | total |
++-------+-------+
+| China |   363 |
++-------+-------+
+1 row in set (0.0028 sec)
+ MySQL  localhost:3306 ssl  world  SQL >
