@@ -1,0 +1,331 @@
+EVA2_9_LEFT_JOIN
+
+MySQL Shell 8.0.37
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 12
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use tbd_eva2;
+Default schema set to `tbd_eva2`.
+Fetching global names, object names from `tbd_eva2` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from clientes;
+ERROR: 1146 (42S02): Table 'tbd_eva2.clientes' doesn't exist
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from cliente;
++----+---------+----------+---------+
+| id | nombre  | apellido | rfc     |
++----+---------+----------+---------+
+|  7 | charli  | xcx      | brat365 |
+|  8 | shakira | melbarak | fovol1  |
++----+---------+----------+---------+
+2 rows in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into cliente(nombre, apellido, rfc)
+                                         -> values("billie", 'eilish, 'chihiro98'),
+                                         -> ('chappell', 'roan', 'pinkponi'),
+                                         -> ('natalia', 'lafourcade', 'raiz850'),
+                                         -> ('phoebe', 'bridgers', 'moonsong'),
+                                         -> ('elisabeth', 'sustancia', 'elisabeth'),
+                                         -> ('sue', 'sue', 'pumpitup');
+                                         '> ;
+                                         '> ^C
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into cliente(nombre, apellido, rfc)  values('billie', 'eilish, 'chihiro98'),
+                                         '> ('chappell', 'roan', 'pinkponi'),
+                                         '>  ('natalia', 'lafourcade', 'raiz850'),
+                                         '>  ('phoebe', 'bridgers', 'moonsong'),
+                                         '>  ('elisabeth', 'sustancia', 'elisabeth'),
+                                         '> ('sue', 'sue', 'pumpitup');
+                                         '>
+                                         '> ^C
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into cliente(nombre, apellido, rfc) values
+                                         -> insert into cliente(nombre, apellido, rfc)  values('billie', 'eilish, 'chihiro98'),^C
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into cliente(nombre, apellido, rfc)  values('billie', 'eilish', 'chihiro98'),
+                                         -> ('chappell', 'roan', 'pinkponi'),
+                                         ->  ('phoebe', 'bridgers', 'moonsong'),
+                                         ->  ('natalia', 'lafourcade', 'raiz850'),
+                                         ->  ('elisabeth', 'sustancia', 'elisabeth'),
+                                         -> ('sue', 'sue', 'pumpitup');
+Query OK, 6 rows affected (0.0146 sec)
+
+Records: 6  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from factura;
++-------+-----------+
+| folio | idCliente |
++-------+-----------+
+|     9 |         7 |
+|    10 |         8 |
++-------+-----------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from cliente;
++----+-----------+------------+-----------+
+| id | nombre    | apellido   | rfc       |
++----+-----------+------------+-----------+
+|  7 | charli    | xcx        | brat365   |
+|  8 | shakira   | melbarak   | fovol1    |
+| 21 | billie    | eilish     | chihiro98 |
+| 22 | chappell  | roan       | pinkponi  |
+| 23 | phoebe    | bridgers   | moonsong  |
+| 24 | natalia   | lafourcade | raiz850   |
+| 25 | elisabeth | sustancia  | elisabeth |
+| 26 | sue       | sue        | pumpitup  |
++----+-----------+------------+-----------+
+8 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into factura(idCliente) values
+                                         -> (21),(21),(22),(22),(23),(25),(25),(25);
+Query OK, 8 rows affected (0.0117 sec)
+
+Records: 8  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from factura;
++-------+-----------+
+| folio | idCliente |
++-------+-----------+
+|     9 |         7 |
+|    10 |         8 |
+|    11 |        21 |
+|    12 |        21 |
+|    13 |        22 |
+|    14 |        22 |
+|    15 |        23 |
+|    16 |        25 |
+|    17 |        25 |
+|    18 |        25 |
++-------+-----------+
+10 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from producto;
++----+--------+--------+
+| id | nombre | precio |
++----+--------+--------+
+|  1 | elote  |  20.00 |
+|  2 | nachos |  50.00 |
++----+--------+--------+
+2 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into producto(nombre, precio) values
+                                         -> ('tacos', 25.00), ('papas', 45.54), ('cafe', 31.00), ('dogo', 58.80);
+Query OK, 4 rows affected (0.0033 sec)
+
+Records: 4  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from producto;
++----+--------+--------+
+| id | nombre | precio |
++----+--------+--------+
+|  1 | elote  |  20.00 |
+|  2 | nachos |  50.00 |
+|  4 | tacos  |  25.00 |
+|  5 | papas  |  45.54 |
+|  6 | cafe   |  31.00 |
+|  7 | dogo   |  58.80 |
++----+--------+--------+
+6 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from factura_detalle;
++----+-----------+------------+----------+
+| id | idFactura | idProducto | cantidad |
++----+-----------+------------+----------+
+| 10 |         9 |          1 |        5 |
+| 11 |        10 |          2 |       60 |
+| 13 |        10 |          1 |        3 |
+| 14 |         9 |          2 |       10 |
++----+-----------+------------+----------+
+4 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from factura;
++-------+-----------+
+| folio | idCliente |
++-------+-----------+
+|     9 |         7 |
+|    10 |         8 |
+|    11 |        21 |
+|    12 |        21 |
+|    13 |        22 |
+|    14 |        22 |
+|    15 |        23 |
+|    16 |        25 |
+|    17 |        25 |
+|    18 |        25 |
++-------+-----------+
+10 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > insert into factura_detalle(idFactura, idproducto, cantidad) values
+                                         -> (11, 7, 9), (12, 6, 2), (12, 5, 8), (13, 4, 10), (14, 1, 2), (16, 4, 4)
+                                         -> , (16, 5, 5), (16, 6, 6), (17, 2, 8), (17, 7, 489), (18, 7, 9);
+Query OK, 11 rows affected (0.0121 sec)
+
+Records: 11  Duplicates: 0  Warnings: 0
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select * from factura_detalle;
++----+-----------+------------+----------+
+| id | idFactura | idProducto | cantidad |
++----+-----------+------------+----------+
+| 10 |         9 |          1 |        5 |
+| 11 |        10 |          2 |       60 |
+| 13 |        10 |          1 |        3 |
+| 14 |         9 |          2 |       10 |
+| 16 |        11 |          7 |        9 |
+| 17 |        12 |          6 |        2 |
+| 18 |        12 |          5 |        8 |
+| 19 |        13 |          4 |       10 |
+| 20 |        14 |          1 |        2 |
+| 21 |        16 |          4 |        4 |
+| 22 |        16 |          5 |        5 |
+| 23 |        16 |          6 |        6 |
+| 24 |        17 |          2 |        8 |
+| 25 |        17 |          7 |      489 |
+| 26 |        18 |          7 |        9 |
++----+-----------+------------+----------+
+15 rows in set (0.0005 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.count(*) as total from cliente a
+                                         -> inner join factura b on a.id = b.idcliente;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) as total from cliente a
+inner join factura b on a.id = b.idcliente' at line 1
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.count(*) as total from cliente a inner join factura b on a.id = b.idcliente
+                                         -> group by a.id;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) as total from cliente a inner join factura b on a.id = b.idcliente
+group by a' at line 1
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.count(*) as total from cliente a inner join factura b on a.id = b.idcliente group by id;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) as total from cliente a inner join factura b on a.id = b.idcliente group by i' at line 1
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, b.count(*) as total from cliente a
+                                         -> inner join factura b on a.id = b.idcliente
+                                         -> group by id
+                                         -> order by apellidos, nombre;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) as total from cliente a
+inner join factura b on a.id = b.idcliente
+group by i' at line 1
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a inner join factura b on a.id = b.idcliente group by id order by apellidos, nombre;
+ERROR: 1054 (42S22): Unknown column 'apellidos' in 'order clause'
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a inner join factura b on a.id = b.idcliente group by id order by apellido, nombre;
++-----------+-----------+-------+
+| nombre    | apellido  | total |
++-----------+-----------+-------+
+| phoebe    | bridgers  |     1 |
+| billie    | eilish    |     2 |
+| shakira   | melbarak  |     1 |
+| chappell  | roan      |     2 |
+| elisabeth | sustancia |     3 |
+| charli    | xcx       |     1 |
++-----------+-----------+-------+
+6 rows in set (0.0096 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a
+                                         -> left join factura b
+                                         -> on a.id = b.idcliente
+                                         -> group by id
+                                         -> order by apellido, nombre;
++-----------+------------+-------+
+| nombre    | apellido   | total |
++-----------+------------+-------+
+| phoebe    | bridgers   |     1 |
+| billie    | eilish     |     2 |
+| natalia   | lafourcade |     1 |
+| shakira   | melbarak   |     1 |
+| chappell  | roan       |     2 |
+| sue       | sue        |     1 |
+| elisabeth | sustancia  |     3 |
+| charli    | xcx        |     1 |
++-----------+------------+-------+
+8 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a  left join factura b on a.id = b.idcliente group by idcliente order by apellido, nombre;
+ERROR: 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'tbd_eva2.a.nombre' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a  left join factura b on a.id = b.idcliente group by b.idcliente order by apellido, nombre;
+ERROR: 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'tbd_eva2.a.nombre' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(*) as total from cliente a  right join factura b on a.id = b.idcliente group by b.idcliente order by apellido, nombre;
++-----------+-----------+-------+
+| nombre    | apellido  | total |
++-----------+-----------+-------+
+| phoebe    | bridgers  |     1 |
+| billie    | eilish    |     2 |
+| shakira   | melbarak  |     1 |
+| chappell  | roan      |     2 |
+| elisabeth | sustancia |     3 |
+| charli    | xcx       |     1 |
++-----------+-----------+-------+
+6 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, count(folio) as total from cliente a  left join factura b on a.id = b.idcliente group by a.id order by apellido, nombre;
++-----------+------------+-------+
+| nombre    | apellido   | total |
++-----------+------------+-------+
+| phoebe    | bridgers   |     1 |
+| billie    | eilish     |     2 |
+| natalia   | lafourcade |     0 |
+| shakira   | melbarak   |     1 |
+| chappell  | roan       |     2 |
+| sue       | sue        |     0 |
+| elisabeth | sustancia  |     3 |
+| charli    | xcx        |     1 |
++-----------+------------+-------+
+8 rows in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > desc producto;
++--------+---------------+------+-----+---------+----------------+
+| Field  | Type          | Null | Key | Default | Extra          |
++--------+---------------+------+-----+---------+----------------+
+| id     | int           | NO   | PRI | NULL    | auto_increment |
+| nombre | varchar(50)   | NO   |     | NULL    |                |
+| precio | decimal(10,2) | NO   |     | NULL    |                |
++--------+---------------+------+-----+---------+----------------+
+3 rows in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.idfactura, b.nombre, a.cantidad,b.precio from factura_detalle a
+                                         -> inner join producto b on a.idproducto = b.id;
++-----------+--------+----------+--------+
+| idfactura | nombre | cantidad | precio |
++-----------+--------+----------+--------+
+|         9 | elote  |        5 |  20.00 |
+|        10 | elote  |        3 |  20.00 |
+|        14 | elote  |        2 |  20.00 |
+|        10 | nachos |       60 |  50.00 |
+|         9 | nachos |       10 |  50.00 |
+|        17 | nachos |        8 |  50.00 |
+|        13 | tacos  |       10 |  25.00 |
+|        16 | tacos  |        4 |  25.00 |
+|        12 | papas  |        8 |  45.54 |
+|        16 | papas  |        5 |  45.54 |
+|        12 | cafe   |        2 |  31.00 |
+|        16 | cafe   |        6 |  31.00 |
+|        11 | dogo   |        9 |  58.80 |
+|        17 | dogo   |      489 |  58.80 |
+|        18 | dogo   |        9 |  58.80 |
++-----------+--------+----------+--------+
+15 rows in set (0.0005 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.idfactura, b.nombre, a.cantidad,b.precio, a.cantidad * b.precio as total from factura_detalle a inner join producto b on a.idproducto = b.id;
++-----------+--------+----------+--------+----------+
+| idfactura | nombre | cantidad | precio | total    |
++-----------+--------+----------+--------+----------+
+|         9 | elote  |        5 |  20.00 |   100.00 |
+|        10 | elote  |        3 |  20.00 |    60.00 |
+|        14 | elote  |        2 |  20.00 |    40.00 |
+|        10 | nachos |       60 |  50.00 |  3000.00 |
+|         9 | nachos |       10 |  50.00 |   500.00 |
+|        17 | nachos |        8 |  50.00 |   400.00 |
+|        13 | tacos  |       10 |  25.00 |   250.00 |
+|        16 | tacos  |        4 |  25.00 |   100.00 |
+|        12 | papas  |        8 |  45.54 |   364.32 |
+|        16 | papas  |        5 |  45.54 |   227.70 |
+|        12 | cafe   |        2 |  31.00 |    62.00 |
+|        16 | cafe   |        6 |  31.00 |   186.00 |
+|        11 | dogo   |        9 |  58.80 |   529.20 |
+|        17 | dogo   |      489 |  58.80 | 28753.20 |
+|        18 | dogo   |        9 |  58.80 |   529.20 |
++-----------+--------+----------+--------+----------+
+15 rows in set (0.0091 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, sum(c.cantidad * d.precio) as total from cliente a
+                                         -> left join factura b on a.id = b.idcliente
+                                         -> left join factura_detalle c on b.folio = c.idfactura
+                                         -> left join producto d on b.idproducto = d.id
+                                         -> group by a.id order by apellido, nombre;
+ERROR: 1054 (42S22): Unknown column 'b.idproducto' in 'on clause'
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL > select a.nombre, a.apellido, sum(c.cantidad * d.precio) as total from cliente a left join factura b on a.id = b.idcliente left join factura_detalle c on b.folio = c.idfactura left join producto d on c.idproducto = d.id group by a.id order by apellido, nombre;
++-----------+------------+----------+
+| nombre    | apellido   | total    |
++-----------+------------+----------+
+| phoebe    | bridgers   |     NULL |
+| billie    | eilish     |   955.52 |
+| natalia   | lafourcade |     NULL |
+| shakira   | melbarak   |  3060.00 |
+| chappell  | roan       |   290.00 |
+| sue       | sue        |     NULL |
+| elisabeth | sustancia  | 30196.10 |
+| charli    | xcx        |   600.00 |
++-----------+------------+----------+
+8 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  tbd_eva2  SQL >
