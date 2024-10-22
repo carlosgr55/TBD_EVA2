@@ -1,0 +1,626 @@
+EVA2_12_USERS
+
+MySQL Shell 8.0.37
+
+Copyright (c) 2016, 2024, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+ MySQL  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 8
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| practica           |
+| sakila             |
+| tbd_eva1           |
+| tbd_eva2           |
+| veterinaria_bd     |
+| veterinaria_schema |
+| world              |
++--------------------+
+11 rows in set (0.0093 sec)
+ MySQL  localhost:3306 ssl  SQL > use mysql;
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  mysql  SQL > show tables;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| columns_priv                                         |
+| component                                            |
+| db                                                   |
+| default_roles                                        |
+| engine_cost                                          |
+| func                                                 |
+| general_log                                          |
+| global_grants                                        |
+| gtid_executed                                        |
+| help_category                                        |
+| help_keyword                                         |
+| help_relation                                        |
+| help_topic                                           |
+| innodb_index_stats                                   |
+| innodb_table_stats                                   |
+| ndb_binlog_index                                     |
+| password_history                                     |
+| plugin                                               |
+| procs_priv                                           |
+| proxies_priv                                         |
+| replication_asynchronous_connection_failover         |
+| replication_asynchronous_connection_failover_managed |
+| replication_group_configuration_version              |
+| replication_group_member_actions                     |
+| role_edges                                           |
+| server_cost                                          |
+| servers                                              |
+| slave_master_info                                    |
+| slave_relay_log_info                                 |
+| slave_worker_info                                    |
+| slow_log                                             |
+| tables_priv                                          |
+| time_zone                                            |
+| time_zone_leap_second                                |
+| time_zone_name                                       |
+| time_zone_transition                                 |
+| time_zone_transition_type                            |
+| user                                                 |
++------------------------------------------------------+
+38 rows in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > desc user;
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+| Field                    | Type                              | Null | Key | Default               | Extra |
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+| Host                     | char(255)                         | NO   | PRI |                       |       |
+| User                     | char(32)                          | NO   | PRI |                       |       |
+| Select_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Insert_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Update_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Delete_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Drop_priv                | enum('N','Y')                     | NO   |     | N                     |       |
+| Reload_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Shutdown_priv            | enum('N','Y')                     | NO   |     | N                     |       |
+| Process_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| File_priv                | enum('N','Y')                     | NO   |     | N                     |       |
+| Grant_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| References_priv          | enum('N','Y')                     | NO   |     | N                     |       |
+| Index_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Alter_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Show_db_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Super_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_tmp_table_priv    | enum('N','Y')                     | NO   |     | N                     |       |
+| Lock_tables_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Execute_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Repl_slave_priv          | enum('N','Y')                     | NO   |     | N                     |       |
+| Repl_client_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_view_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Show_view_priv           | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_routine_priv      | enum('N','Y')                     | NO   |     | N                     |       |
+| Alter_routine_priv       | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_user_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Event_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Trigger_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_tablespace_priv   | enum('N','Y')                     | NO   |     | N                     |       |
+| ssl_type                 | enum('','ANY','X509','SPECIFIED') | NO   |     |                       |       |
+| ssl_cipher               | blob                              | NO   |     | NULL                  |       |
+| x509_issuer              | blob                              | NO   |     | NULL                  |       |
+| x509_subject             | blob                              | NO   |     | NULL                  |       |
+| max_questions            | int unsigned                      | NO   |     | 0                     |       |
+| max_updates              | int unsigned                      | NO   |     | 0                     |       |
+| max_connections          | int unsigned                      | NO   |     | 0                     |       |
+| max_user_connections     | int unsigned                      | NO   |     | 0                     |       |
+| plugin                   | char(64)                          | NO   |     | caching_sha2_password |       |
+| authentication_string    | text                              | YES  |     | NULL                  |       |
+| password_expired         | enum('N','Y')                     | NO   |     | N                     |       |
+| password_last_changed    | timestamp                         | YES  |     | NULL                  |       |
+| password_lifetime        | smallint unsigned                 | YES  |     | NULL                  |       |
+| account_locked           | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_role_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Drop_role_priv           | enum('N','Y')                     | NO   |     | N                     |       |
+| Password_reuse_history   | smallint unsigned                 | YES  |     | NULL                  |       |
+| Password_reuse_time      | smallint unsigned                 | YES  |     | NULL                  |       |
+| Password_require_current | enum('N','Y')                     | YES  |     | NULL                  |       |
+| User_attributes          | json                              | YES  |     | NULL                  |       |
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+51 rows in set (0.0018 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > select host, user from user;
++-----------+------------------+
+| host      | user             |
++-----------+------------------+
+| localhost | mysql.infoschema |
+| localhost | mysql.session    |
+| localhost | mysql.sys        |
+| localhost | root             |
++-----------+------------------+
+4 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > create user 'ruben'@'localhost' identified by '1234';
+Query OK, 0 rows affected (0.0205 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > \connect --mc ruben@localhost
+Creating a Classic session to 'ruben@localhost'
+Please provide the password for 'ruben@localhost': ****
+Save password for 'ruben@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 9
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
++--------------------+
+2 rows in set (0.0010 sec)
+ MySQL  localhost:3306 ssl  SQL > create database prueba;
+ERROR: 1044 (42000): Access denied for user 'ruben'@'localhost' to database 'prueba'
+ MySQL  localhost:3306 ssl  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 10
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use mysql;
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  mysql  SQL > drop user ruben@localhost;
+Query OK, 0 rows affected (0.0123 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > \connect --mc ruben@localhost;
+Creating a Classic session to 'ruben@localhost;'
+Please provide the password for 'ruben@localhost;': ****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  mysql  SQL > \connect --mc ruben@localhost;
+Creating a Classic session to 'ruben@localhost;'
+Please provide the password for 'ruben@localhost;': ****
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  mysql  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 11
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > use mysql;
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  mysql  SQL > create user 'ruben'@'localhost' identified by '123';
+Query OK, 0 rows affected (0.0155 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > grant all on *.* to 'ruben'@'localhost';
+Query OK, 0 rows affected (0.0122 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > \connect --mc ruben@localhost;
+Creating a Classic session to 'ruben@localhost;'
+Please provide the password for 'ruben@localhost;': ***
+MySQL Error 2005 (HY000): Unknown MySQL server host 'localhost;' (11001)
+ MySQL  localhost:3306 ssl  mysql  SQL > show tables;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| columns_priv                                         |
+| component                                            |
+| db                                                   |
+| default_roles                                        |
+| engine_cost                                          |
+| func                                                 |
+| general_log                                          |
+| global_grants                                        |
+| gtid_executed                                        |
+| help_category                                        |
+| help_keyword                                         |
+| help_relation                                        |
+| help_topic                                           |
+| innodb_index_stats                                   |
+| innodb_table_stats                                   |
+| ndb_binlog_index                                     |
+| password_history                                     |
+| plugin                                               |
+| procs_priv                                           |
+| proxies_priv                                         |
+| replication_asynchronous_connection_failover         |
+| replication_asynchronous_connection_failover_managed |
+| replication_group_configuration_version              |
+| replication_group_member_actions                     |
+| role_edges                                           |
+| server_cost                                          |
+| servers                                              |
+| slave_master_info                                    |
+| slave_relay_log_info                                 |
+| slave_worker_info                                    |
+| slow_log                                             |
+| tables_priv                                          |
+| time_zone                                            |
+| time_zone_leap_second                                |
+| time_zone_name                                       |
+| time_zone_transition                                 |
+| time_zone_transition_type                            |
+| user                                                 |
++------------------------------------------------------+
+38 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| practica           |
+| sakila             |
+| tbd_eva1           |
+| tbd_eva2           |
+| veterinaria_bd     |
+| veterinaria_schema |
+| world              |
++--------------------+
+11 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  mysql  SQL > use sakila;
+Default schema set to `sakila`.
+Fetching global names, object names from `sakila` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  sakila  SQL > show tables;
++----------------------------+
+| Tables_in_sakila           |
++----------------------------+
+| actor                      |
+| actor_info                 |
+| address                    |
+| category                   |
+| city                       |
+| country                    |
+| customer                   |
+| customer_list              |
+| film                       |
+| film_actor                 |
+| film_category              |
+| film_list                  |
+| film_text                  |
+| inventory                  |
+| language                   |
+| nicer_but_slower_film_list |
+| payment                    |
+| rental                     |
+| sales_by_film_category     |
+| sales_by_store             |
+| staff                      |
+| staff_list                 |
+| store                      |
++----------------------------+
+23 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  sakila  SQL > \connect --mc root@localhost;
+Creating a Classic session to 'root@localhost;'
+Please provide the password for 'root@localhost;':
+Cancelled
+ MySQL  localhost:3306 ssl  sakila  SQL > \connect --mc ruben@localhost
+Creating a Classic session to 'ruben@localhost'
+Please provide the password for 'ruben@localhost': ***
+Save password for 'ruben@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 12
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 13
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show grant 'ruben'@'localhost';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'grant 'ruben'@'localhost'' at line 1
+ MySQL  localhost:3306 ssl  SQL > show grant ruben@localhost
+                               -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'grant ruben@localhost' at line 1
+ MySQL  localhost:3306 ssl  SQL > show grants ruben@localhost ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ruben@localhost' at line 1
+ MySQL  localhost:3306 ssl  SQL > show grants 'ruben'@'localhost' ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''ruben'@'localhost'' at line 1
+ MySQL  localhost:3306 ssl  SQL > revoker all on *.* from 'ruben'@'localhost';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'revoker all on *.* from 'ruben'@'localhost'' at line 1
+ MySQL  localhost:3306 ssl  SQL > revoke all on *.* from 'ruben'@'localhost';
+Query OK, 0 rows affected (0.0122 sec)
+ MySQL  localhost:3306 ssl  SQL > show grants for 'ruben'@'localhost' ;
++-------------------------------------------+
+| Grants for ruben@localhost                |
++-------------------------------------------+
+| GRANT USAGE ON *.* TO `ruben`@`localhost` |
++-------------------------------------------+
+1 row in set (0.0003 sec)
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| practica           |
+| sakila             |
+| tbd_eva1           |
+| tbd_eva2           |
+| veterinaria_bd     |
+| veterinaria_schema |
+| world              |
++--------------------+
+11 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  SQL > grant all on empresa.* to 'ruben'@'localhost';
+Query OK, 0 rows affected (0.0117 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc ruben@localhost
+Creating a Classic session to 'ruben@localhost'
+Please provide the password for 'ruben@localhost': ***
+Save password for 'ruben@localhost'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 14
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;'
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.0008 sec)
+                               '> ^C
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| empresa            |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  SQL > use empresa;
+Default schema set to `empresa`.
+Fetching global names, object names from `empresa` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  empresa  SQL > show tables;
++-------------------+
+| Tables_in_empresa |
++-------------------+
+| dates             |
+| employee          |
+| jobs              |
+| location          |
+| salary            |
++-------------------+
+5 rows in set (0.0013 sec)
+ MySQL  localhost:3306 ssl  empresa  SQL > create table prueba(id int);
+Query OK, 0 rows affected (0.0235 sec)
+ MySQL  localhost:3306 ssl  empresa  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 15
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > create user
+                               -> 'prueba2
+                               -> '@'localhost' identified by '123';
+Query OK, 0 rows affected (0.0092 sec)
+ MySQL  localhost:3306 ssl  SQL > grant all on practica.countries to 'prueba2'@'localhost';
+Query OK, 0 rows affected (0.0107 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba2@localhost
+Creating a Classic session to 'prueba2@localhost'
+Please provide the password for 'prueba2@localhost': ***
+Save password for 'prueba2@localhost'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 16
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| practica           |
++--------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  SQL > use practica;
+Default schema set to `practica`.
+Fetching global names, object names from `practica` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  practica  SQL > show tables;
++--------------------+
+| Tables_in_practica |
++--------------------+
+| countries          |
++--------------------+
+1 row in set (0.0011 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > desc countries;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| COUNTRY_ID   | varchar(2)    | NO   | PRI | NULL    |       |
+| COUNTRY_NAME | varchar(40)   | YES  |     | NULL    |       |
+| REGION_ID    | decimal(10,0) | YES  | MUL | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+3 rows in set (0.0022 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > show create table countries;
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table     | Create Table
+                                                                                                                                           |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| countries | CREATE TABLE `countries` (
+  `COUNTRY_ID` varchar(2) NOT NULL,
+  `COUNTRY_NAME` varchar(40) DEFAULT NULL,
+  `REGION_ID` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`COUNTRY_ID`),
+  KEY `COUNTR_REG_FK` (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.0030 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > \connect --mc prueba2@localhost
+Creating a Classic session to 'prueba2@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 17
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show create table countries;
+ERROR: 1046 (3D000): No database selected
+ MySQL  localhost:3306 ssl  SQL > use practica;
+Default schema set to `practica`.
+Fetching global names, object names from `practica` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  practica  SQL > show create table countries;
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table     | Create Table
+                                                                                                                                           |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| countries | CREATE TABLE `countries` (
+  `COUNTRY_ID` varchar(2) NOT NULL,
+  `COUNTRY_NAME` varchar(40) DEFAULT NULL,
+  `REGION_ID` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`COUNTRY_ID`),
+  KEY `COUNTR_REG_FK` (`REGION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-----------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.0007 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_id, country_name) values
+                                         -> ('pg', 'pangea')l
+                                         -> ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'l' at line 2
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_id, country_name) values ('pg', 'pangea') ;
+Query OK, 1 row affected (0.0108 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > select * from countries;'
++------------+--------------------------+-----------+
+| COUNTRY_ID | COUNTRY_NAME             | REGION_ID |
++------------+--------------------------+-----------+
+| AR         | Argentina                |         2 |
+| AU         | Australia                |         3 |
+| BE         | Belgium                  |         1 |
+| BR         | Brazil                   |         2 |
+| CA         | Canada                   |         2 |
+| CH         | Switzerland              |         1 |
+| CN         | China                    |         3 |
+| DE         | Germany                  |         1 |
+| DK         | Denmark                  |         1 |
+| EG         | Egypt                    |         4 |
+| FR         | France                   |         1 |
+| HK         | HongKong                 |         3 |
+| IL         | Israel                   |         4 |
+| IN         | India                    |         3 |
+| IT         | Italy                    |         1 |
+| JP         | Japan                    |         3 |
+| KW         | Kuwait                   |         4 |
+| MX         | Mexico                   |         2 |
+| NG         | Nigeria                  |         4 |
+| NL         | Netherlands              |         1 |
+| pg         | pangea                   |      NULL |
+| SG         | Singapore                |         3 |
+| UK         | United Kingdom           |         1 |
+| US         | United States of America |         2 |
+| ZM         | Zambia                   |         4 |
+| ZW         | Zimbabwe                 |         4 |
++------------+--------------------------+-----------+
+26 rows in set (0.0088 sec)
+                                         '> ^C
+ MySQL  localhost:3306 ssl  practica  SQL > \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 18
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > create user 'prueba3'@'localhost' identified by '123';
+Query OK, 0 rows affected (0.0160 sec)
+ MySQL  localhost:3306 ssl  SQL > grant insert(country_id), select(country_name) on practica.countries
+                               -> to 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.0034 sec)
+ MySQL  localhost:3306 ssl  SQL > \connect --mc prueba3@localhost
+Creating a Classic session to 'prueba3@localhost'
+Please provide the password for 'prueba3@localhost': ***
+Save password for 'prueba3@localhost'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 19
+Server version: 8.0.37 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  localhost:3306 ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
+| practica           |
++--------------------+
+3 rows in set (0.0008 sec)
+ MySQL  localhost:3306 ssl  SQL > use practica;
+Default schema set to `practica`.
+Fetching global names, object names from `practica` for auto-completion... Press ^C to stop.
+ MySQL  localhost:3306 ssl  practica  SQL > show tables;
++--------------------+
+| Tables_in_practica |
++--------------------+
+| countries          |
++--------------------+
+1 row in set (0.0014 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > drop countries;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'countries' at line 1
+ MySQL  localhost:3306 ssl  practica  SQL > drop table countries;
+ERROR: 1142 (42000): DROP command denied to user 'prueba3'@'localhost' for table 'countries'
+ MySQL  localhost:3306 ssl  practica  SQL > delete from countries;
+ERROR: 1142 (42000): DELETE command denied to user 'prueba3'@'localhost' for table 'countries'
+ MySQL  localhost:3306 ssl  practica  SQL > select * from countries;
+ERROR: 1142 (42000): SELECT command denied to user 'prueba3'@'localhost' for table 'countries'
+ MySQL  localhost:3306 ssl  practica  SQL > select country_name from countries;
++--------------------------+
+| country_name             |
++--------------------------+
+| Argentina                |
+| Australia                |
+| Belgium                  |
+| Brazil                   |
+| Canada                   |
+| Switzerland              |
+| China                    |
+| Germany                  |
+| Denmark                  |
+| Egypt                    |
+| France                   |
+| HongKong                 |
+| Israel                   |
+| India                    |
+| Italy                    |
+| Japan                    |
+| Kuwait                   |
+| Mexico                   |
+| Nigeria                  |
+| Netherlands              |
+| pangea                   |
+| Singapore                |
+| United Kingdom           |
+| United States of America |
+| Zambia                   |
+| Zimbabwe                 |
++--------------------------+
+26 rows in set (0.0004 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_id, country_name) values ('lj', 'lijonia);
+                                         '> ^C
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_id, country_name) values ('lj', 'lijonia');
+ERROR: 1143 (42000): INSERT command denied to user 'prueba3'@'localhost' for column 'country_name' in table 'countries'
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_id) values ('xx');
+Query OK, 1 row affected (0.0107 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > insert into countries(country_name) values ('xx');
+ERROR: 1143 (42000): INSERT command denied to user 'prueba3'@'localhost' for column 'country_name' in table 'countries'
+ MySQL  localhost:3306 ssl  practica  SQL >

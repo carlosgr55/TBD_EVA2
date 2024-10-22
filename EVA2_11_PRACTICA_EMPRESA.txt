@@ -1,0 +1,751 @@
+> select a.first_name, a.last_name, b.department_name from employees a left join departments b on a.department_id = b.department_id;
++-------------+-------------+------------------+
+| first_name  | last_name   | department_name  |
++-------------+-------------+------------------+
+| Steven      | King        | Executive        |
+| Neena       | Kochhar     | Executive        |
+| Lex         | De Haan     | Executive        |
+| Alexander   | Hunold      | IT               |
+| Bruce       | Ernst       | IT               |
+| David       | Austin      | IT               |
+| Valli       | Pataballa   | IT               |
+| Diana       | Lorentz     | IT               |
+| Nancy       | Greenberg   | Finance          |
+| Daniel      | Faviet      | Finance          |
+| John        | Chen        | Finance          |
+| Ismael      | Sciarra     | Finance          |
+| Jose Manuel | Urman       | Finance          |
+| Luis        | Popp        | Finance          |
+| Den         | Raphaely    | Purchasing       |
+| Alexander   | Khoo        | Purchasing       |
+| Shelli      | Baida       | Purchasing       |
+| Sigal       | Tobias      | Purchasing       |
+| Guy         | Himuro      | Purchasing       |
+| Karen       | Colmenares  | Purchasing       |
+| Matthew     | Weiss       | Shipping         |
+| Adam        | Fripp       | Shipping         |
+| Payam       | Kaufling    | Shipping         |
+| Shanta      | Vollman     | Shipping         |
+| Kevin       | Mourgos     | Shipping         |
+| Julia       | Nayer       | Shipping         |
+| Irene       | Mikkilineni | Shipping         |
+| James       | Landry      | Shipping         |
+| Steven      | Markle      | Shipping         |
+| Laura       | Bissot      | Shipping         |
+| Mozhe       | Atkinson    | Shipping         |
+| James       | Marlow      | Shipping         |
+| TJ          | Olson       | Shipping         |
+| Jason       | Mallin      | Shipping         |
+| Michael     | Rogers      | Shipping         |
+| Ki          | Gee         | Shipping         |
+| Hazel       | Philtanker  | Shipping         |
+| Renske      | Ladwig      | Shipping         |
+| Stephen     | Stiles      | Shipping         |
+| John        | Seo         | Shipping         |
+| Joshua      | Patel       | Shipping         |
+| Trenna      | Rajs        | Shipping         |
+| Curtis      | Davies      | Shipping         |
+| Randall     | Matos       | Shipping         |
+| Peter       | Vargas      | Shipping         |
+| John        | Russell     | Sales            |
+| Karen       | Partners    | Sales            |
+| Alberto     | Errazuriz   | Sales            |
+| Gerald      | Cambrault   | Sales            |
+| Eleni       | Zlotkey     | Sales            |
+| Peter       | Tucker      | Sales            |
+| David       | Bernstein   | Sales            |
+| Peter       | Hall        | Sales            |
+| Christopher | Olsen       | Sales            |
+| Nanette     | Cambrault   | Sales            |
+| Oliver      | Tuvault     | Sales            |
+| Janette     | King        | Sales            |
+| Patrick     | Sully       | Sales            |
+| Allan       | McEwen      | Sales            |
+| Lindsey     | Smith       | Sales            |
+| Louise      | Doran       | Sales            |
+| Sarath      | Sewall      | Sales            |
+| Clara       | Vishney     | Sales            |
+| Danielle    | Greene      | Sales            |
+| Mattea      | Marvins     | Sales            |
+| David       | Lee         | Sales            |
+| Sundar      | Ande        | Sales            |
+| Amit        | Banda       | Sales            |
+| Lisa        | Ozer        | Sales            |
+| Harrison    | Bloom       | Sales            |
+| Tayler      | Fox         | Sales            |
+| William     | Smith       | Sales            |
+| Elizabeth   | Bates       | Sales            |
+| Sundita     | Kumar       | Sales            |
+| Ellen       | Abel        | Sales            |
+| Alyssa      | Hutton      | Sales            |
+| Jonathon    | Taylor      | Sales            |
+| Jack        | Livingston  | Sales            |
+| Kimberely   | Grant       | NULL             |
+| Charles     | Johnson     | Sales            |
+| Winston     | Taylor      | Shipping         |
+| Jean        | Fleaur      | Shipping         |
+| Martha      | Sullivan    | Shipping         |
+| Girard      | Geoni       | Shipping         |
+| Nandita     | Sarchand    | Shipping         |
+| Alexis      | Bull        | Shipping         |
+| Julia       | Dellinger   | Shipping         |
+| Anthony     | Cabrio      | Shipping         |
+| Kelly       | Chung       | Shipping         |
+| Jennifer    | Dilly       | Shipping         |
+| Timothy     | Gates       | Shipping         |
+| Randall     | Perkins     | Shipping         |
+| Sarah       | Bell        | Shipping         |
+| Britney     | Everett     | Shipping         |
+| Samuel      | McCain      | Shipping         |
+| Vance       | Jones       | Shipping         |
+| Alana       | Walsh       | Shipping         |
+| Kevin       | Feeney      | Shipping         |
+| Donald      | OConnell    | Shipping         |
+| Douglas     | Grant       | Shipping         |
+| Jennifer    | Whalen      | Administration   |
+| Michael     | Hartstein   | Marketing        |
+| Pat         | Fay         | Marketing        |
+| Susan       | Mavris      | Human Resources  |
+| Hermann     | Baer        | Public Relations |
+| Shelley     | Higgins     | Accounting       |
+| William     | Gietz       | Accounting       |
++-------------+-------------+------------------+
+107 rows in set (0.0006 sec)
+ MySQL  localhost:3306 ssl  practica  SQL > select a.first_name, a.last_name, b.department_name from employees a left join departments b on a.manager_id = b.manager_id;
++-------------+-------------+----------------------+
+| first_name  | last_name   | department_name      |
++-------------+-------------+----------------------+
+| Steven      | King        | Treasury             |
+| Steven      | King        | Corporate Tax        |
+| Steven      | King        | Control And Credit   |
+| Steven      | King        | Shareholder Services |
+| Steven      | King        | Benefits             |
+| Steven      | King        | Manufacturing        |
+| Steven      | King        | Construction         |
+| Steven      | King        | Contracting          |
+| Steven      | King        | Operations           |
+| Steven      | King        | IT Support           |
+| Steven      | King        | NOC                  |
+| Steven      | King        | IT Helpdesk          |
+| Steven      | King        | Government Sales     |
+| Steven      | King        | Retail Sales         |
+| Steven      | King        | Recruiting           |
+| Steven      | King        | Payroll              |
+| Neena       | Kochhar     | Executive            |
+| Lex         | De Haan     | Executive            |
+| Alexander   | Hunold      | NULL                 |
+| Bruce       | Ernst       | IT                   |
+| David       | Austin      | IT                   |
+| Valli       | Pataballa   | IT                   |
+| Diana       | Lorentz     | IT                   |
+| Nancy       | Greenberg   | NULL                 |
+| Daniel      | Faviet      | Finance              |
+| John        | Chen        | Finance              |
+| Ismael      | Sciarra     | Finance              |
+| Jose Manuel | Urman       | Finance              |
+| Luis        | Popp        | Finance              |
+| Den         | Raphaely    | Executive            |
+| Alexander   | Khoo        | Purchasing           |
+| Shelli      | Baida       | Purchasing           |
+| Sigal       | Tobias      | Purchasing           |
+| Guy         | Himuro      | Purchasing           |
+| Karen       | Colmenares  | Purchasing           |
+| Matthew     | Weiss       | Executive            |
+| Adam        | Fripp       | Executive            |
+| Payam       | Kaufling    | Executive            |
+| Shanta      | Vollman     | Executive            |
+| Kevin       | Mourgos     | Executive            |
+| Julia       | Nayer       | NULL                 |
+| Irene       | Mikkilineni | NULL                 |
+| James       | Landry      | NULL                 |
+| Steven      | Markle      | NULL                 |
+| Laura       | Bissot      | Shipping             |
+| Mozhe       | Atkinson    | Shipping             |
+| James       | Marlow      | Shipping             |
+| TJ          | Olson       | Shipping             |
+| Jason       | Mallin      | NULL                 |
+| Michael     | Rogers      | NULL                 |
+| Ki          | Gee         | NULL                 |
+| Hazel       | Philtanker  | NULL                 |
+| Renske      | Ladwig      | NULL                 |
+| Stephen     | Stiles      | NULL                 |
+| John        | Seo         | NULL                 |
+| Joshua      | Patel       | NULL                 |
+| Trenna      | Rajs        | NULL                 |
+| Curtis      | Davies      | NULL                 |
+| Randall     | Matos       | NULL                 |
+| Peter       | Vargas      | NULL                 |
+| John        | Russell     | Executive            |
+| Karen       | Partners    | Executive            |
+| Alberto     | Errazuriz   | Executive            |
+| Gerald      | Cambrault   | Executive            |
+| Eleni       | Zlotkey     | Executive            |
+| Peter       | Tucker      | Sales                |
+| David       | Bernstein   | Sales                |
+| Peter       | Hall        | Sales                |
+| Christopher | Olsen       | Sales                |
+| Nanette     | Cambrault   | Sales                |
+| Oliver      | Tuvault     | Sales                |
+| Janette     | King        | NULL                 |
+| Patrick     | Sully       | NULL                 |
+| Allan       | McEwen      | NULL                 |
+| Lindsey     | Smith       | NULL                 |
+| Louise      | Doran       | NULL                 |
+| Sarath      | Sewall      | NULL                 |
+| Clara       | Vishney     | NULL                 |
+| Danielle    | Greene      | NULL                 |
+| Mattea      | Marvins     | NULL                 |
+| David       | Lee         | NULL                 |
+| Sundar      | Ande        | NULL                 |
+| Amit        | Banda       | NULL                 |
+| Lisa        | Ozer        | NULL                 |
+| Harrison    | Bloom       | NULL                 |
+| Tayler      | Fox         | NULL                 |
+| William     | Smith       | NULL                 |
+| Elizabeth   | Bates       | NULL                 |
+| Sundita     | Kumar       | NULL                 |
+| Ellen       | Abel        | NULL                 |
+| Alyssa      | Hutton      | NULL                 |
+| Jonathon    | Taylor      | NULL                 |
+| Jack        | Livingston  | NULL                 |
+| Kimberely   | Grant       | NULL                 |
+| Charles     | Johnson     | NULL                 |
+| Winston     | Taylor      | NULL                 |
+| Jean        | Fleaur      | NULL                 |
+| Martha      | Sullivan    | NULL                 |
+| Girard      | Geoni       | NULL                 |
+| Nandita     | Sarchand    | Shipping             |
+| Alexis      | Bull        | Shipping             |
+| Julia       | Dellinger   | Shipping             |
+| Anthony     | Cabrio      | Shipping             |
+| Kelly       | Chung       | NULL                 |
+| Jennifer    | Dilly       | NULL                 |
+| Timothy     | Gates       | NULL                 |
+| Randall     | Perkins     | NULL                 |
+| Sarah       | Bell        | NULL                 |
+| Britney     | Everett     | NULL                 |
+| Samuel      | McCain      | NULL                 |
+| Vance       | Jones       | NULL                 |
+| Alana       | Walsh       | NULL                 |
+| Kevin       | Feeney      | NULL                 |
+| Donald      | OConnell    | NULL                 |
+| Douglas     | Grant       | NULL                 |
+| Jennifer    | Whalen      | NULL                 |
+| Michael     | Hartstein   | Executive            |
+| Pat         | Fay         | Marketing            |
+| Susan       | Mavris      | NULL                 |
+| Hermann     | Baer        | NULL                 |
+| Shelley     | Higgins     | NULL                 |
+| William     | Gietz       | Accounting           |
++-------------+-------------+----------------------+
+122 rows in set (0.0009 sec)
+ MySQL  localhost:3306 ssl  practica  SQL >
+
+
+
+ select a.first_name, a.last_name, b.job_title, c.department_name, d.start_date, d.end_date from  employees a left join job_history d on a.employee_id = d.employee_id
+                                         -> left join jobs b on d.job_id = b.job_id
+                                         -> left join departments c on d.department_id = c.department_id;
++-------------+-------------+--------------------------+-----------------+------------+------------+
+| first_name  | last_name   | job_title                | department_name | start_date | end_date   |
++-------------+-------------+--------------------------+-----------------+------------+------------+
+| Ellen       | Abel        | NULL                     | NULL            | NULL       | NULL       |
+| Sundar      | Ande        | NULL                     | NULL            | NULL       | NULL       |
+| Mozhe       | Atkinson    | NULL                     | NULL            | NULL       | NULL       |
+| David       | Austin      | NULL                     | NULL            | NULL       | NULL       |
+| Hermann     | Baer        | NULL                     | NULL            | NULL       | NULL       |
+| Shelli      | Baida       | NULL                     | NULL            | NULL       | NULL       |
+| Amit        | Banda       | NULL                     | NULL            | NULL       | NULL       |
+| Elizabeth   | Bates       | NULL                     | NULL            | NULL       | NULL       |
+| Sarah       | Bell        | NULL                     | NULL            | NULL       | NULL       |
+| David       | Bernstein   | NULL                     | NULL            | NULL       | NULL       |
+| Laura       | Bissot      | NULL                     | NULL            | NULL       | NULL       |
+| Harrison    | Bloom       | NULL                     | NULL            | NULL       | NULL       |
+| Alexis      | Bull        | NULL                     | NULL            | NULL       | NULL       |
+| Anthony     | Cabrio      | NULL                     | NULL            | NULL       | NULL       |
+| Gerald      | Cambrault   | NULL                     | NULL            | NULL       | NULL       |
+| Nanette     | Cambrault   | NULL                     | NULL            | NULL       | NULL       |
+| John        | Chen        | NULL                     | NULL            | NULL       | NULL       |
+| Kelly       | Chung       | NULL                     | NULL            | NULL       | NULL       |
+| Karen       | Colmenares  | NULL                     | NULL            | NULL       | NULL       |
+| Curtis      | Davies      | NULL                     | NULL            | NULL       | NULL       |
+| Lex         | De Haan     | Programmer               | IT              | 1993-01-13 | 1998-07-24 |
+| Julia       | Dellinger   | NULL                     | NULL            | NULL       | NULL       |
+| Jennifer    | Dilly       | NULL                     | NULL            | NULL       | NULL       |
+| Louise      | Doran       | NULL                     | NULL            | NULL       | NULL       |
+| Bruce       | Ernst       | NULL                     | NULL            | NULL       | NULL       |
+| Alberto     | Errazuriz   | NULL                     | NULL            | NULL       | NULL       |
+| Britney     | Everett     | NULL                     | NULL            | NULL       | NULL       |
+| Daniel      | Faviet      | NULL                     | NULL            | NULL       | NULL       |
+| Pat         | Fay         | NULL                     | NULL            | NULL       | NULL       |
+| Kevin       | Feeney      | NULL                     | NULL            | NULL       | NULL       |
+| Jean        | Fleaur      | NULL                     | NULL            | NULL       | NULL       |
+| Tayler      | Fox         | NULL                     | NULL            | NULL       | NULL       |
+| Adam        | Fripp       | NULL                     | NULL            | NULL       | NULL       |
+| Timothy     | Gates       | NULL                     | NULL            | NULL       | NULL       |
+| Ki          | Gee         | NULL                     | NULL            | NULL       | NULL       |
+| Girard      | Geoni       | NULL                     | NULL            | NULL       | NULL       |
+| William     | Gietz       | NULL                     | NULL            | NULL       | NULL       |
+| Douglas     | Grant       | NULL                     | NULL            | NULL       | NULL       |
+| Kimberely   | Grant       | NULL                     | NULL            | NULL       | NULL       |
+| Nancy       | Greenberg   | NULL                     | NULL            | NULL       | NULL       |
+| Danielle    | Greene      | NULL                     | NULL            | NULL       | NULL       |
+| Peter       | Hall        | NULL                     | NULL            | NULL       | NULL       |
+| Michael     | Hartstein   | Marketing Representative | Marketing       | 1996-02-17 | 1999-12-19 |
+| Shelley     | Higgins     | NULL                     | NULL            | NULL       | NULL       |
+| Guy         | Himuro      | NULL                     | NULL            | NULL       | NULL       |
+| Alexander   | Hunold      | NULL                     | NULL            | NULL       | NULL       |
+| Alyssa      | Hutton      | NULL                     | NULL            | NULL       | NULL       |
+| Charles     | Johnson     | NULL                     | NULL            | NULL       | NULL       |
+| Vance       | Jones       | NULL                     | NULL            | NULL       | NULL       |
+| Payam       | Kaufling    | Stock Clerk              | Shipping        | 1999-01-01 | 1999-12-31 |
+| Alexander   | Khoo        | NULL                     | NULL            | NULL       | NULL       |
+| Janette     | King        | NULL                     | NULL            | NULL       | NULL       |
+| Steven      | King        | NULL                     | NULL            | NULL       | NULL       |
+| Neena       | Kochhar     | Public Accountant        | Accounting      | 1989-09-21 | 1993-10-27 |
+| Neena       | Kochhar     | Accounting Manager       | Accounting      | 1993-10-28 | 1997-03-15 |
+| Sundita     | Kumar       | NULL                     | NULL            | NULL       | NULL       |
+| Renske      | Ladwig      | NULL                     | NULL            | NULL       | NULL       |
+| James       | Landry      | NULL                     | NULL            | NULL       | NULL       |
+| David       | Lee         | NULL                     | NULL            | NULL       | NULL       |
+| Jack        | Livingston  | NULL                     | NULL            | NULL       | NULL       |
+| Diana       | Lorentz     | NULL                     | NULL            | NULL       | NULL       |
+| Jason       | Mallin      | NULL                     | NULL            | NULL       | NULL       |
+| Steven      | Markle      | NULL                     | NULL            | NULL       | NULL       |
+| James       | Marlow      | NULL                     | NULL            | NULL       | NULL       |
+| Mattea      | Marvins     | NULL                     | NULL            | NULL       | NULL       |
+| Randall     | Matos       | NULL                     | NULL            | NULL       | NULL       |
+| Susan       | Mavris      | NULL                     | NULL            | NULL       | NULL       |
+| Samuel      | McCain      | NULL                     | NULL            | NULL       | NULL       |
+| Allan       | McEwen      | NULL                     | NULL            | NULL       | NULL       |
+| Irene       | Mikkilineni | NULL                     | NULL            | NULL       | NULL       |
+| Kevin       | Mourgos     | NULL                     | NULL            | NULL       | NULL       |
+| Julia       | Nayer       | NULL                     | NULL            | NULL       | NULL       |
+| Donald      | OConnell    | NULL                     | NULL            | NULL       | NULL       |
+| Christopher | Olsen       | NULL                     | NULL            | NULL       | NULL       |
+| TJ          | Olson       | NULL                     | NULL            | NULL       | NULL       |
+| Lisa        | Ozer        | NULL                     | NULL            | NULL       | NULL       |
+| Karen       | Partners    | NULL                     | NULL            | NULL       | NULL       |
+| Valli       | Pataballa   | NULL                     | NULL            | NULL       | NULL       |
+| Joshua      | Patel       | NULL                     | NULL            | NULL       | NULL       |
+| Randall     | Perkins     | NULL                     | NULL            | NULL       | NULL       |
+| Hazel       | Philtanker  | NULL                     | NULL            | NULL       | NULL       |
+| Luis        | Popp        | NULL                     | NULL            | NULL       | NULL       |
+| Trenna      | Rajs        | NULL                     | NULL            | NULL       | NULL       |
+| Den         | Raphaely    | Stock Clerk              | Shipping        | 1998-03-24 | 1999-12-31 |
+| Michael     | Rogers      | NULL                     | NULL            | NULL       | NULL       |
+| John        | Russell     | NULL                     | NULL            | NULL       | NULL       |
+| Nandita     | Sarchand    | NULL                     | NULL            | NULL       | NULL       |
+| Ismael      | Sciarra     | NULL                     | NULL            | NULL       | NULL       |
+| John        | Seo         | NULL                     | NULL            | NULL       | NULL       |
+| Sarath      | Sewall      | NULL                     | NULL            | NULL       | NULL       |
+| Lindsey     | Smith       | NULL                     | NULL            | NULL       | NULL       |
+| William     | Smith       | NULL                     | NULL            | NULL       | NULL       |
+| Stephen     | Stiles      | NULL                     | NULL            | NULL       | NULL       |
+| Martha      | Sullivan    | NULL                     | NULL            | NULL       | NULL       |
+| Patrick     | Sully       | NULL                     | NULL            | NULL       | NULL       |
+| Jonathon    | Taylor      | Sales Representative     | Sales           | 1998-03-24 | 1998-12-31 |
+| Jonathon    | Taylor      | Sales Manager            | Sales           | 1999-01-01 | 1999-12-31 |
+| Winston     | Taylor      | NULL                     | NULL            | NULL       | NULL       |
+| Sigal       | Tobias      | NULL                     | NULL            | NULL       | NULL       |
+| Peter       | Tucker      | NULL                     | NULL            | NULL       | NULL       |
+| Oliver      | Tuvault     | NULL                     | NULL            | NULL       | NULL       |
+| Jose Manuel | Urman       | NULL                     | NULL            | NULL       | NULL       |
+| Peter       | Vargas      | NULL                     | NULL            | NULL       | NULL       |
+| Clara       | Vishney     | NULL                     | NULL            | NULL       | NULL       |
+| Shanta      | Vollman     | NULL                     | NULL            | NULL       | NULL       |
+| Alana       | Walsh       | NULL                     | NULL            | NULL       | NULL       |
+| Matthew     | Weiss       | NULL                     | NULL            | NULL       | NULL       |
+| Jennifer    | Whalen      | Administration Assistant | Executive       | 1987-09-17 | 1993-06-17 |
+| Jennifer    | Whalen      | Public Accountant        | Executive       | 1994-07-01 | 1998-12-31 |
+| Eleni       | Zlotkey     | NULL                     | NULL            | NULL       | NULL       |
++-------------+-------------+--------------------------+-----------------+------------+------------+
+110 rows in set (0.0009 sec)
+
+
+select a.department_name, b.street_address, b.city, c.country_name, d.region_name from departments a left join locations b on a.location_id = b.location_id left join countries c on c.country_id = b.country_id left join regions d on d.region_id = c.region_id;
++----------------------+-----------------------+---------------------+--------------------------+-------------+
+| department_name      | street_address        | city                | country_name             | region_name |
++----------------------+-----------------------+---------------------+--------------------------+-------------+
+| Administration       | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Marketing            | 147 Spadina Ave       | Toronto             | Canada                   | Americas    |
+| Purchasing           | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Human Resources      | 8204 Arthur St        | London              | United Kingdom           | Europe      |
+| Shipping             | 2011 Interiors Blvd   | South San Francisco | United States of America | Americas    |
+| IT                   | 2014 Jabberwocky Rd   | Southlake           | United States of America | Americas    |
+| Public Relations     | Schwanthalerstr. 7031 | Munich              | Germany                  | Europe      |
+| Sales                | "Magdalen Centre      | OX9 9ZB             | NULL                     | NULL        |
+| Executive            | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Finance              | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Accounting           | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Treasury             | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Corporate Tax        | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Control And Credit   | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Shareholder Services | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Benefits             | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Manufacturing        | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Construction         | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Contracting          | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Operations           | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| IT Support           | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| NOC                  | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| IT Helpdesk          | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Government Sales     | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Retail Sales         | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Recruiting           | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
+| Payroll              | 2004 Charade Rd       | Seattle             | United States of America | Americas    |
++----------------------+-----------------------+---------------------+--------------------------+-------------+
+27 rows in set (0.0007 sec)
+
+
+ select a.manager_id, b.first_name, b.last_name from departments a
+                                         -> inner join employees b on a.manager_id = b.manager_id;
++------------+-------------+------------+
+| manager_id | first_name  | last_name  |
++------------+-------------+------------+
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|          0 | Steven      | King       |
+|        100 | Neena       | Kochhar    |
+|        100 | Lex         | De Haan    |
+|        100 | Den         | Raphaely   |
+|        100 | Matthew     | Weiss      |
+|        100 | Adam        | Fripp      |
+|        100 | Payam       | Kaufling   |
+|        100 | Shanta      | Vollman    |
+|        100 | Kevin       | Mourgos    |
+|        100 | John        | Russell    |
+|        100 | Karen       | Partners   |
+|        100 | Alberto     | Errazuriz  |
+|        100 | Gerald      | Cambrault  |
+|        100 | Eleni       | Zlotkey    |
+|        100 | Michael     | Hartstein  |
+|        103 | Bruce       | Ernst      |
+|        103 | David       | Austin     |
+|        103 | Valli       | Pataballa  |
+|        103 | Diana       | Lorentz    |
+|        108 | Daniel      | Faviet     |
+|        108 | John        | Chen       |
+|        108 | Ismael      | Sciarra    |
+|        108 | Jose Manuel | Urman      |
+|        108 | Luis        | Popp       |
+|        114 | Alexander   | Khoo       |
+|        114 | Shelli      | Baida      |
+|        114 | Sigal       | Tobias     |
+|        114 | Guy         | Himuro     |
+|        114 | Karen       | Colmenares |
+|        121 | Laura       | Bissot     |
+|        121 | Mozhe       | Atkinson   |
+|        121 | James       | Marlow     |
+|        121 | TJ          | Olson      |
+|        121 | Nandita     | Sarchand   |
+|        121 | Alexis      | Bull       |
+|        121 | Julia       | Dellinger  |
+|        121 | Anthony     | Cabrio     |
+|        145 | Peter       | Tucker     |
+|        145 | David       | Bernstein  |
+|        145 | Peter       | Hall       |
+|        145 | Christopher | Olsen      |
+|        145 | Nanette     | Cambrault  |
+|        145 | Oliver      | Tuvault    |
+|        201 | Pat         | Fay        |
+|        205 | William     | Gietz      |
++------------+-------------+------------+
+60 rows in set (0.0006 sec)
+
+
+
+ MySQL  localhost:3306 ssl  practica  SQL > select a.manager_id, b.first_name, b.last_name from departments a right join employees b on a.manager_id = b.manager_id;
++------------+-------------+-------------+
+| manager_id | first_name  | last_name   |
++------------+-------------+-------------+
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|          0 | Steven      | King        |
+|        100 | Neena       | Kochhar     |
+|        100 | Lex         | De Haan     |
+|       NULL | Alexander   | Hunold      |
+|        103 | Bruce       | Ernst       |
+|        103 | David       | Austin      |
+|        103 | Valli       | Pataballa   |
+|        103 | Diana       | Lorentz     |
+|       NULL | Nancy       | Greenberg   |
+|        108 | Daniel      | Faviet      |
+|        108 | John        | Chen        |
+|        108 | Ismael      | Sciarra     |
+|        108 | Jose Manuel | Urman       |
+|        108 | Luis        | Popp        |
+|        100 | Den         | Raphaely    |
+|        114 | Alexander   | Khoo        |
+|        114 | Shelli      | Baida       |
+|        114 | Sigal       | Tobias      |
+|        114 | Guy         | Himuro      |
+|        114 | Karen       | Colmenares  |
+|        100 | Matthew     | Weiss       |
+|        100 | Adam        | Fripp       |
+|        100 | Payam       | Kaufling    |
+|        100 | Shanta      | Vollman     |
+|        100 | Kevin       | Mourgos     |
+|       NULL | Julia       | Nayer       |
+|       NULL | Irene       | Mikkilineni |
+|       NULL | James       | Landry      |
+|       NULL | Steven      | Markle      |
+|        121 | Laura       | Bissot      |
+|        121 | Mozhe       | Atkinson    |
+|        121 | James       | Marlow      |
+|        121 | TJ          | Olson       |
+|       NULL | Jason       | Mallin      |
+|       NULL | Michael     | Rogers      |
+|       NULL | Ki          | Gee         |
+|       NULL | Hazel       | Philtanker  |
+|       NULL | Renske      | Ladwig      |
+|       NULL | Stephen     | Stiles      |
+|       NULL | John        | Seo         |
+|       NULL | Joshua      | Patel       |
+|       NULL | Trenna      | Rajs        |
+|       NULL | Curtis      | Davies      |
+|       NULL | Randall     | Matos       |
+|       NULL | Peter       | Vargas      |
+|        100 | John        | Russell     |
+|        100 | Karen       | Partners    |
+|        100 | Alberto     | Errazuriz   |
+|        100 | Gerald      | Cambrault   |
+|        100 | Eleni       | Zlotkey     |
+|        145 | Peter       | Tucker      |
+|        145 | David       | Bernstein   |
+|        145 | Peter       | Hall        |
+|        145 | Christopher | Olsen       |
+|        145 | Nanette     | Cambrault   |
+|        145 | Oliver      | Tuvault     |
+|       NULL | Janette     | King        |
+|       NULL | Patrick     | Sully       |
+|       NULL | Allan       | McEwen      |
+|       NULL | Lindsey     | Smith       |
+|       NULL | Louise      | Doran       |
+|       NULL | Sarath      | Sewall      |
+|       NULL | Clara       | Vishney     |
+|       NULL | Danielle    | Greene      |
+|       NULL | Mattea      | Marvins     |
+|       NULL | David       | Lee         |
+|       NULL | Sundar      | Ande        |
+|       NULL | Amit        | Banda       |
+|       NULL | Lisa        | Ozer        |
+|       NULL | Harrison    | Bloom       |
+|       NULL | Tayler      | Fox         |
+|       NULL | William     | Smith       |
+|       NULL | Elizabeth   | Bates       |
+|       NULL | Sundita     | Kumar       |
+|       NULL | Ellen       | Abel        |
+|       NULL | Alyssa      | Hutton      |
+|       NULL | Jonathon    | Taylor      |
+|       NULL | Jack        | Livingston  |
+|       NULL | Kimberely   | Grant       |
+|       NULL | Charles     | Johnson     |
+|       NULL | Winston     | Taylor      |
+|       NULL | Jean        | Fleaur      |
+|       NULL | Martha      | Sullivan    |
+|       NULL | Girard      | Geoni       |
+|        121 | Nandita     | Sarchand    |
+|        121 | Alexis      | Bull        |
+|        121 | Julia       | Dellinger   |
+|        121 | Anthony     | Cabrio      |
+|       NULL | Kelly       | Chung       |
+|       NULL | Jennifer    | Dilly       |
+|       NULL | Timothy     | Gates       |
+|       NULL | Randall     | Perkins     |
+|       NULL | Sarah       | Bell        |
+|       NULL | Britney     | Everett     |
+|       NULL | Samuel      | McCain      |
+|       NULL | Vance       | Jones       |
+|       NULL | Alana       | Walsh       |
+|       NULL | Kevin       | Feeney      |
+|       NULL | Donald      | OConnell    |
+|       NULL | Douglas     | Grant       |
+|       NULL | Jennifer    | Whalen      |
+|        100 | Michael     | Hartstein   |
+|        201 | Pat         | Fay         |
+|       NULL | Susan       | Mavris      |
+|       NULL | Hermann     | Baer        |
+|       NULL | Shelley     | Higgins     |
+|        205 | William     | Gietz       |
++------------+-------------+-------------+
+122 rows in set (0.0007 sec)
+
+
+ MySQL  localhost:3306 ssl  practica  SQL > select b.first_name, b.last_name, a.region_name from employees b
+                                         -> left join departments c on c.department_id = b.department_id
+                                         -> left join locations d on d.location_id = c.location_id
+                                         -> left join countries e on e.country_id = d.country_id
+                                         -> left join regions a on a.region_id = e.region_id;
++-------------+-------------+-------------+
+| first_name  | last_name   | region_name |
++-------------+-------------+-------------+
+| Steven      | King        | Americas    |
+| Neena       | Kochhar     | Americas    |
+| Lex         | De Haan     | Americas    |
+| Alexander   | Hunold      | Americas    |
+| Bruce       | Ernst       | Americas    |
+| David       | Austin      | Americas    |
+| Valli       | Pataballa   | Americas    |
+| Diana       | Lorentz     | Americas    |
+| Nancy       | Greenberg   | Americas    |
+| Daniel      | Faviet      | Americas    |
+| John        | Chen        | Americas    |
+| Ismael      | Sciarra     | Americas    |
+| Jose Manuel | Urman       | Americas    |
+| Luis        | Popp        | Americas    |
+| Den         | Raphaely    | Americas    |
+| Alexander   | Khoo        | Americas    |
+| Shelli      | Baida       | Americas    |
+| Sigal       | Tobias      | Americas    |
+| Guy         | Himuro      | Americas    |
+| Karen       | Colmenares  | Americas    |
+| Matthew     | Weiss       | Americas    |
+| Adam        | Fripp       | Americas    |
+| Payam       | Kaufling    | Americas    |
+| Shanta      | Vollman     | Americas    |
+| Kevin       | Mourgos     | Americas    |
+| Julia       | Nayer       | Americas    |
+| Irene       | Mikkilineni | Americas    |
+| James       | Landry      | Americas    |
+| Steven      | Markle      | Americas    |
+| Laura       | Bissot      | Americas    |
+| Mozhe       | Atkinson    | Americas    |
+| James       | Marlow      | Americas    |
+| TJ          | Olson       | Americas    |
+| Jason       | Mallin      | Americas    |
+| Michael     | Rogers      | Americas    |
+| Ki          | Gee         | Americas    |
+| Hazel       | Philtanker  | Americas    |
+| Renske      | Ladwig      | Americas    |
+| Stephen     | Stiles      | Americas    |
+| John        | Seo         | Americas    |
+| Joshua      | Patel       | Americas    |
+| Trenna      | Rajs        | Americas    |
+| Curtis      | Davies      | Americas    |
+| Randall     | Matos       | Americas    |
+| Peter       | Vargas      | Americas    |
+| John        | Russell     | NULL        |
+| Karen       | Partners    | NULL        |
+| Alberto     | Errazuriz   | NULL        |
+| Gerald      | Cambrault   | NULL        |
+| Eleni       | Zlotkey     | NULL        |
+| Peter       | Tucker      | NULL        |
+| David       | Bernstein   | NULL        |
+| Peter       | Hall        | NULL        |
+| Christopher | Olsen       | NULL        |
+| Nanette     | Cambrault   | NULL        |
+| Oliver      | Tuvault     | NULL        |
+| Janette     | King        | NULL        |
+| Patrick     | Sully       | NULL        |
+| Allan       | McEwen      | NULL        |
+| Lindsey     | Smith       | NULL        |
+| Louise      | Doran       | NULL        |
+| Sarath      | Sewall      | NULL        |
+| Clara       | Vishney     | NULL        |
+| Danielle    | Greene      | NULL        |
+| Mattea      | Marvins     | NULL        |
+| David       | Lee         | NULL        |
+| Sundar      | Ande        | NULL        |
+| Amit        | Banda       | NULL        |
+| Lisa        | Ozer        | NULL        |
+| Harrison    | Bloom       | NULL        |
+| Tayler      | Fox         | NULL        |
+| William     | Smith       | NULL        |
+| Elizabeth   | Bates       | NULL        |
+| Sundita     | Kumar       | NULL        |
+| Ellen       | Abel        | NULL        |
+| Alyssa      | Hutton      | NULL        |
+| Jonathon    | Taylor      | NULL        |
+| Jack        | Livingston  | NULL        |
+| Kimberely   | Grant       | NULL        |
+| Charles     | Johnson     | NULL        |
+| Winston     | Taylor      | Americas    |
+| Jean        | Fleaur      | Americas    |
+| Martha      | Sullivan    | Americas    |
+| Girard      | Geoni       | Americas    |
+| Nandita     | Sarchand    | Americas    |
+| Alexis      | Bull        | Americas    |
+| Julia       | Dellinger   | Americas    |
+| Anthony     | Cabrio      | Americas    |
+| Kelly       | Chung       | Americas    |
+| Jennifer    | Dilly       | Americas    |
+| Timothy     | Gates       | Americas    |
+| Randall     | Perkins     | Americas    |
+| Sarah       | Bell        | Americas    |
+| Britney     | Everett     | Americas    |
+| Samuel      | McCain      | Americas    |
+| Vance       | Jones       | Americas    |
+| Alana       | Walsh       | Americas    |
+| Kevin       | Feeney      | Americas    |
+| Donald      | OConnell    | Americas    |
+| Douglas     | Grant       | Americas    |
+| Jennifer    | Whalen      | Americas    |
+| Michael     | Hartstein   | Americas    |
+| Pat         | Fay         | Americas    |
+| Susan       | Mavris      | Europe      |
+| Hermann     | Baer        | Europe      |
+| Shelley     | Higgins     | Americas    |
+| William     | Gietz       | Americas    |
++-------------+-------------+-------------+
+107 rows in set (0.0012 sec)
+
+
+ select a.department_name, b.region_name from departments a left join locations c on a.location_id = c.location_id left join countries d on c.country_id = d.country_id left join regions b on b.region_id = d.region_id;
++----------------------+-------------+
+| department_name      | region_name |
++----------------------+-------------+
+| Administration       | Americas    |
+| Marketing            | Americas    |
+| Purchasing           | Americas    |
+| Human Resources      | Europe      |
+| Shipping             | Americas    |
+| IT                   | Americas    |
+| Public Relations     | Europe      |
+| Sales                | NULL        |
+| Executive            | Americas    |
+| Finance              | Americas    |
+| Accounting           | Americas    |
+| Treasury             | Americas    |
+| Corporate Tax        | Americas    |
+| Control And Credit   | Americas    |
+| Shareholder Services | Americas    |
+| Benefits             | Americas    |
+| Manufacturing        | Americas    |
+| Construction         | Americas    |
+| Contracting          | Americas    |
+| Operations           | Americas    |
+| IT Support           | Americas    |
+| NOC                  | Americas    |
+| IT Helpdesk          | Americas    |
+| Government Sales     | Americas    |
+| Retail Sales         | Americas    |
+| Recruiting           | Americas    |
+| Payroll              | Americas    |
++----------------------+-------
